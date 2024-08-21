@@ -1,3 +1,4 @@
+import '@style/_reset.scss';
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 
