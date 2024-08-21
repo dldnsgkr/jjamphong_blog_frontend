@@ -1,6 +1,6 @@
 <script setup>
-import Bell from './icon/Bell.vue';
-import Search from './icon/Search.vue';
+import Bell from '@components/web/icon/Bell.vue';
+import Search from '@components/web/icon/Search.vue';
 </script>
 <template>
   <header class="client-header">
