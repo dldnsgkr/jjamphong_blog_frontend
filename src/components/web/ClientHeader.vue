@@ -8,8 +8,8 @@ import Search from '@components/web/icon/Search.vue';
     <div class="function-wrapper">
       <Search />
       <Bell />
-      <button>새 글 작성</button>
-      <button>Login</button>
+      <div class="header-button">새 글 작성</div>
+      <div class="header-button">Login</div>
     </div>
   </header>
 </template>
