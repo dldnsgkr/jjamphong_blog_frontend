@@ -2,6 +2,7 @@
 import Bell from '@components/web/icon/Bell.vue';
 import Search from '@components/web/icon/Search.vue';
 </script>
+
 <template>
   <header class="client-header">
     <div class="logo">Eclectic Explorations</div>
@@ -13,6 +14,7 @@ import Search from '@components/web/icon/Search.vue';
     </div>
   </header>
 </template>
+
 <style lang="scss">
 .client-header {
   display: flex;
@@ -20,11 +22,13 @@ import Search from '@components/web/icon/Search.vue';
   .logo {
     padding: 2.4rem 0;
     font-size: 1.5rem;
+    cursor: pointer;
   }
   .function-wrapper {
     display: flex;
+    align-items: center;
     padding: 2.4rem 0;
-    gap: 1rem;
+    gap: 1.2rem;
   }
 }
 </style>
