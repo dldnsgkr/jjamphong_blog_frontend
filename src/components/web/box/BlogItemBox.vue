@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import mokup_image from '@assets/img/mokup_blog_item.png';
 import icon_black_heart from '@assets/icon/icon-black-heart.svg';
 
 type mokup_blog_item_listPropsType = {
   title: string;
   sub_title: string;
   current_date: string;
+  img: string;
   comment_count: number;
   nickName: string;
   writer: string;
@@ -64,11 +64,13 @@ const props = defineProps<{
 </script>
 <template>
   <div class="blog-item-wrapper">
-    <img
-      v-if="mokup_image"
-      :src="mokup_image"
-      alt="Blog Image"
-    />
+    <div class="blog-item-image-wrapper">
+      <img
+        v-if="props.mokup_blog_item_list.img"
+        :src="props.mokup_blog_item_list.img"
+        alt="Blog Image"
+      />
+    </div>
     <div class="blog-item-text">
       <div class="title-wrapper">
         <p class="main-title">
@@ -113,12 +115,21 @@ const props = defineProps<{
   display: flex;
   flex-direction: column;
   border-radius: 12px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  img {
+  transition:
+    transform 250ms,
+    box-shadow 0.3s;
+  .blog-item-image-wrapper {
+    position: relative;
+    padding-top: 52.1921%;
     width: 100%;
-    height: auto;
-    object-fit: cover;
+    img {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      inset: 0px;
+    }
   }
   .blog-item-text {
     height: 9rem;
@@ -175,6 +186,11 @@ const props = defineProps<{
       gap: 7px;
       font-size: 13px;
     }
+  }
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0px 10px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
   }
 }
 </style>
