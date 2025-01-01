@@ -1,5 +1,5 @@
 <script setup>
-import ModalBackground from '@components/universal/modalBackground.vue';
+import ModalBackground from '@components/universal/ModalBackground.vue';
 import TeleportView from '@components/universal/TeleportView.vue';
 import Bell from '@components/web/icon/Bell.vue';
 import Search from '@components/web/icon/Search.vue';

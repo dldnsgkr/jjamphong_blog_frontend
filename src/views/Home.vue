@@ -7,6 +7,7 @@ import mokup_image3 from '@assets/img/mokup_blog_item3.png';
 
 const mokup_blog_item_list = [
   {
+    id: 1,
     title: 'test 1',
     sub_title:
       'sub test 1 sub test 1 sub test 1 sub test 1 sub test 1sub test 1sub test 1 sub test 1sub test 1 sub test 1sub test 1 sub test 1sub test 1sub test 1 sub test 1sub test 1sub test 1 sub test 1 sub test 1 sub test 1sub test 1sub test 1sub test 1sub test 1v sub test 1v sub test 1 sub test 1 vsub test 1 sub test 1 sub test 1 vv sub test 1vsub test 1vvvvv sub test 1sub test 1sub test 1 v vsub test 1 vsub test 1sub test 1sub test 1sub test 1 sub test 1 sub test 1sub test 1 v sub test 1vsub test 1 sub test 1 sub test 1sub test 1v  sub test 1 sub test 1sub test 1 sub test 1sub test 1sub test 1v sub test 1sub test 1 sub test 1  sub test 1sub test 1sub test 1sub test 1sub test 1v v',
@@ -18,6 +19,7 @@ const mokup_blog_item_list = [
     like_count: 190,
   },
   {
+    id: 2,
     title: 'test 2',
     sub_title: 'sub test 2',
     current_date: '2024-04-24',
@@ -28,6 +30,7 @@ const mokup_blog_item_list = [
     like_count: 12130,
   },
   {
+    id: 3,
     title: 'test 2',
     sub_title: 'sub test 2',
     current_date: '2024-04-24',

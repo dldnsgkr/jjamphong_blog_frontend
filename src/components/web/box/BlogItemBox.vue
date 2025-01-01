@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import icon_black_heart from '@assets/icon/icon-black-heart.svg';
+import { useRouter } from 'vue-router';
 
 type mokup_blog_item_listPropsType = {
+  id: number;
   title: string;
   sub_title: string;
   current_date: string;
@@ -15,6 +17,14 @@ type mokup_blog_item_listPropsType = {
 const props = defineProps<{
   mokup_blog_item_list: mokup_blog_item_listPropsType;
 }>();
+
+const router = useRouter();
+
+const navigateToBlogItem = () => {
+  router.push({
+    path: `/item/${props.mokup_blog_item_list.id}`,
+  });
+};
 
 // typeScript 기본값 적용을 원할시 부모에서 객체를 분할 시켜서 보내줘야함
 // const props = withDefaults(
@@ -62,8 +72,12 @@ const props = defineProps<{
 //   },
 // });
 </script>
+
 <template>
-  <div class="blog-item-wrapper">
+  <div
+    class="blog-item-wrapper"
+    @click="navigateToBlogItem"
+  >
     <div class="blog-item-image-wrapper">
       <img
         v-if="props.mokup_blog_item_list.img"
