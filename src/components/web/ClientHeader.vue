@@ -8,8 +8,8 @@ import SearchBar from './input/SearchBar.vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
+
 const isSpecificRoute = route.path === '/';
-console.log(route.path);
 
 const activateBackground = ref(false);
 
@@ -25,7 +25,7 @@ function modalBackgroundHandler() {
       <div class="function-wrapper">
         <Search @click="modalBackgroundHandler" />
         <Bell />
-        <!-- <div class="header-button">새 글 작성</div> -->
+        <div class="header-button">새 글 작성</div>
         <div class="header-button">Login</div>
       </div>
     </div>
@@ -46,6 +46,7 @@ function modalBackgroundHandler() {
   .basic-header-wrapper {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     .logo {
       padding: 2.4rem 0;
       font-size: 1.5rem;

@@ -68,6 +68,7 @@ const closeModal = () => {
     height: 4%;
     right: 6%;
     top: 38%;
+    cursor: pointer;
   }
 }
 </style>
