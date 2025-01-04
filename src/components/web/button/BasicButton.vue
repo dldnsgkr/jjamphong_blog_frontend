@@ -1,7 +1,7 @@
 <script setup lang="ts">
 type ButtonPropsType = {
   text: string;
-  class?: string;
+  class?: 'grassButton' | 'basicButton';
 };
 const props = withDefaults(defineProps<ButtonPropsType>(), {
   class: 'basicButton',
@@ -14,6 +14,7 @@ const props = withDefaults(defineProps<ButtonPropsType>(), {
 
 <style scoped lang="scss">
 .round-button {
+  height: 2rem;
   padding: 0.5rem 1rem;
   border-radius: 2rem;
   transition:

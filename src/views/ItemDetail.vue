@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import BeSideRoutingBox from '@components/web/box/BeSideRoutingBox.vue';
 import BasicButton from '@components/web/button/BasicButton.vue';
+import Contour from '@components/web/Contour.vue';
 import LinkTag from '@components/web/tag/LinkTag.vue';
 </script>
 
@@ -22,6 +24,30 @@ import LinkTag from '@components/web/tag/LinkTag.vue';
         <div class="tag-container">
           <LinkTag text="Vue" link="/asdf" />
         </div>
+      </div>
+    </section>
+    <section></section>
+    <section class="contents-footer">
+      <div class="footer-first-container">
+        <div class="footer-writter-info">
+          <div class="writter-image">
+            <img
+              class=""
+              src="@assets/img/mokup_blog_user_image.svg"
+              alt="user-image"
+            />
+          </div>
+          <p class="writter">lee un hak</p>
+        </div>
+        <BasicButton text="팔로우" class="grassButton" />
+      </div>
+      <Contour />
+      <div class="footer-second-container">
+        <BeSideRoutingBox
+          title="hahahahahahahahasfsadfasdfasfasdfasdfasdfdfsdafsadfdfsdafasdf"
+          align="left"
+        />
+        <BeSideRoutingBox title="blablabla" align="right" />
       </div>
     </section>
   </main>
@@ -48,7 +74,8 @@ import LinkTag from '@components/web/tag/LinkTag.vue';
 }
 .detail-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   .detailSection-container {
     width: 60%;
     @media (max-width: 800px) {
@@ -78,6 +105,56 @@ import LinkTag from '@components/web/tag/LinkTag.vue';
           }
         }
       }
+    }
+  }
+  .contents-footer {
+    width: 60%;
+    margin-top: 16rem;
+    margin-bottom: 6rem;
+    .footer-first-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .footer-writter-info {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        .writter-image {
+          width: 108px;
+          height: 108px;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: solid 1px rgba(0, 0, 0, 0.2);
+          border-radius: 10rem;
+          cursor: pointer;
+          transition: transform 0.3s ease;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+          }
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
+        .writter {
+          font-size: x-large;
+          font-weight: 700;
+          &:hover {
+            cursor: pointer;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    .footer-second-container {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      gap: 2%;
     }
   }
 }
