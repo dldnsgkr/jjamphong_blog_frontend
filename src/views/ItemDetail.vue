@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import BeSideRoutingBox from '@components/web/box/BeSideRoutingBox.vue';
 import BasicButton from '@components/web/button/BasicButton.vue';
+import InputButton from '@components/web/button/InputButton.vue';
 import Contour from '@components/web/Contour.vue';
+import BasicTextArea from '@components/web/input/BasicTextArea.vue';
 import LinkTag from '@components/web/tag/LinkTag.vue';
 </script>
 
@@ -50,10 +52,20 @@ import LinkTag from '@components/web/tag/LinkTag.vue';
         <BeSideRoutingBox title="blablabla" align="right" />
       </div>
     </section>
+    <section class="comment-container">
+      <p class="commentCount">0개의 댓글</p>
+      <div class="comment-writing-area">
+        <BasicTextArea placeholder="댓글을 작성하세요." />
+      </div>
+      <InputButton text="팔로우" animationtype="bright" />
+    </section>
   </main>
 </template>
 
 <style scoped lang="scss">
+section {
+  width: 60%;
+}
 .title {
   font-size: 3rem;
   line-height: 1.5;
@@ -77,7 +89,6 @@ import LinkTag from '@components/web/tag/LinkTag.vue';
   flex-direction: column;
   align-items: center;
   .detailSection-container {
-    width: 60%;
     @media (max-width: 800px) {
       width: 80%;
     }
@@ -108,7 +119,6 @@ import LinkTag from '@components/web/tag/LinkTag.vue';
     }
   }
   .contents-footer {
-    width: 60%;
     margin-top: 16rem;
     margin-bottom: 6rem;
     .footer-first-container {
@@ -155,6 +165,19 @@ import LinkTag from '@components/web/tag/LinkTag.vue';
       width: 100%;
       align-items: center;
       gap: 2%;
+    }
+  }
+  .comment-container {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    .commentCount {
+      margin-bottom: 1rem;
+      align-self: self-start;
+    }
+    .comment-writing-area {
+      width: 100%;
+      margin-bottom: 1.5rem;
     }
   }
 }
