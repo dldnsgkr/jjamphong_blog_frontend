@@ -6,6 +6,7 @@ import Search from '@components/web/icon/Search.vue';
 import { ref } from 'vue';
 import SearchBar from './input/SearchBar.vue';
 import { useRoute } from 'vue-router';
+import BasicButton from './button/BasicButton.vue';
 
 const route = useRoute();
 
@@ -25,8 +26,8 @@ function modalBackgroundHandler() {
       <div class="function-wrapper">
         <Search @click="modalBackgroundHandler" />
         <Bell />
-        <div class="header-button">새 글 작성</div>
-        <div class="header-button">Login</div>
+        <BasicButton text="팔로우" />
+        <BasicButton text="팔로우" />
       </div>
     </div>
     <div v-if="isSpecificRoute"></div>
@@ -43,6 +44,10 @@ function modalBackgroundHandler() {
 .client-header {
   display: flex;
   flex-direction: column;
+  padding: 0 4rem;
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
   .basic-header-wrapper {
     display: flex;
     justify-content: space-between;

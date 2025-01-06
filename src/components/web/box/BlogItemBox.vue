@@ -20,8 +20,8 @@ const props = defineProps<{
 
 const router = useRouter();
 
-const navigateToBlogItem = () => {
-  router.push({
+const navigateToBlogItem = async () => {
+  await router.push({
     path: `/item/${props.mokup_blog_item_list.id}`,
   });
 };

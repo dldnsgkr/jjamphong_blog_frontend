@@ -44,7 +44,7 @@ const mokup_blog_item_list = [
 </script>
 <template>
   <main>
-    <section class="main-list--container">
+    <section class="list-container">
       <div v-for="item in mokup_blog_item_list">
         <BlogItemBox :mokup_blog_item_list="item" />
       </div>
@@ -57,26 +57,4 @@ const mokup_blog_item_list = [
     </section>
   </main>
 </template>
-<style lang="scss" scoped>
-.main-list--container {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(200px, 1fr));
-  gap: 2rem;
-
-  @media (max-width: 1919px) {
-    grid-template-columns: repeat(4, minmax(200px, 1fr));
-  }
-
-  @media (max-width: 1439px) {
-    grid-template-columns: repeat(3, minmax(200px, 1fr));
-  }
-
-  @media (max-width: 1056px) {
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(1, minmax(200px, 1fr));
-  }
-}
-</style>
+<style lang="scss" scoped></style>

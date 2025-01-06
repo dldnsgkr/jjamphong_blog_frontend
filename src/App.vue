@@ -5,20 +5,9 @@ import { RouterView } from 'vue-router';
 </script>
 
 <template>
-  <div class="wrapper">
-    <ClientHeader />
-    <RouterView />
-    <ClientFooter />
-  </div>
+  <ClientHeader />
+  <RouterView :key="$route.path" />
+  <ClientFooter />
 </template>
 
-<style scoped>
-.wrapper {
-  padding: 0 4rem;
-}
-@media (max-width: 768px) {
-  .wrapper {
-    padding: 0 1rem;
-  }
-}
-</style>
+<style scoped></style>
