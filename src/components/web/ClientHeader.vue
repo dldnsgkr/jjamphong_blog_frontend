@@ -26,7 +26,7 @@ function modalBackgroundHandler() {
       <div class="function-wrapper">
         <Search @click="modalBackgroundHandler" />
         <Bell />
-        <BasicButton text="팔로우" />
+        <BasicButton text="새 글 작성" />
         <BasicButton text="팔로우" />
       </div>
     </div>
