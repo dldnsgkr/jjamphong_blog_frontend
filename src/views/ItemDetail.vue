@@ -10,6 +10,17 @@ import BlogItemBoxSkeleton from '@components/web/skeleton/BlogItemBoxSkeleton.vu
 import mokup_image1 from '@assets/img/mokup_blog_item.png';
 import mokup_image2 from '@assets/img/mokup_blog_item2.png';
 import mokup_image3 from '@assets/img/mokup_blog_item3.png';
+import FloatArea from '@components/web/FloatArea.vue';
+import Heart from '@components/web/icon/Heart.vue';
+import { reactive, ref } from 'vue';
+import Share from '@components/web/icon/Share.vue';
+import Instagram from '@components/web/icon/Instagram.vue';
+import Slack from '@components/web/icon/Slack.vue';
+import Discord from '@components/web/icon/Discord.vue';
+import Github from '@components/web/icon/Github.vue';
+import Phone from '@components/web/icon/Phone.vue';
+import Facebook from '@components/web/icon/Facebook.vue';
+import Email from '@components/web/icon/Email.vue';
 
 const mokup_blog_item_list = [
   {
@@ -81,10 +92,50 @@ const mokup_blog_item_list = [
     like_count: 12130,
   },
 ];
+const hover = reactive({
+  like: false,
+  share: false,
+  discord: false,
+  github: false,
+  phone: false,
+  facebook: false,
+  email: false,
+  slack: false,
+  instagram: false,
+});
 </script>
 
 <template>
   <main class="detail-container">
+    <FloatArea :top="'35%'" :left="'85%'"
+      >asfasfsdfsdfd</FloatArea
+    >
+    <FloatArea :top="'35%'" :right="'85%'"
+      ><div class="like-share-floatContainer">
+        <div
+          class="floatContainer-button"
+          @mouseover="hover.like = true"
+          @mouseleave="hover.like = false"
+        >
+          <Heart
+            :fillColor="
+              hover.like ? 'black' : 'rgba(0, 0, 0, 0.5)'
+            "
+          />
+        </div>
+        <p>0</p>
+        <div
+          class="floatContainer-button"
+          @mouseover="hover.share = true"
+          @mouseleave="hover.share = false"
+        >
+          <Share
+            :fillColor="
+              hover.share ? 'black' : 'rgba(0, 0, 0, 0.5)'
+            "
+          />
+        </div></div
+    ></FloatArea>
     <section class="detailSection-container">
       <h1 class="title">
         제목입니다. 제목입니다. 제목입니다. 제목입니다.
@@ -104,6 +155,14 @@ const mokup_blog_item_list = [
         </div>
       </div>
     </section>
+    <section class="advertisement-container">
+      <div style="width: 60%">
+        <div
+          class=""
+          style="height: 300px; background-color: black"
+        ></div>
+      </div>
+    </section>
     <section></section>
     <section class="contents-footer">
       <div class="footer-first-container">
@@ -120,6 +179,57 @@ const mokup_blog_item_list = [
         <BasicButton text="팔로우" class="grassButton" />
       </div>
       <Contour />
+      <div class="contect-writter-container">
+        <Instagram
+          :isHover="hover.instagram"
+          @mouseover="hover.instagram = true"
+          @mouseleave="hover.instagram = false"
+        />
+        <Slack
+          :isHover="hover.slack"
+          @mouseover="hover.slack = true"
+          @mouseleave="hover.slack = false"
+        />
+        <Discord
+          :fillColor="
+            hover.discord
+              ? '#5865f2'
+              : 'rgba(88, 101, 242, 0.5)'
+          "
+          @mouseover="hover.discord = true"
+          @mouseleave="hover.discord = false"
+        />
+        <Github
+          :fillColor="
+            hover.github ? 'black' : 'rgba(0, 0, 0, 0.5)'
+          "
+          @mouseover="hover.github = true"
+          @mouseleave="hover.github = false"
+        />
+        <Phone
+          :fillColor="
+            hover.phone ? 'black' : 'rgba(0, 0, 0, 0.5)'
+          "
+          @mouseover="hover.phone = true"
+          @mouseleave="hover.phone = false"
+        />
+        <Facebook
+          :fillColor="
+            hover.facebook
+              ? '#1877f2'
+              : 'rgba(24, 119, 242, 0.5)'
+          "
+          @mouseover="hover.facebook = true"
+          @mouseleave="hover.facebook = false"
+        />
+        <Email
+          :fillColor="
+            hover.email ? 'black' : 'rgba(0, 0, 0, 0.5)'
+          "
+          @mouseover="hover.email = true"
+          @mouseleave="hover.email = false"
+        />
+      </div>
       <div class="footer-second-container">
         <BeSideRoutingBox
           title="hahahahahahahahasfsadfasdfasfasdfasdfasdfdfsdafsadfdfsdafasdf"
@@ -161,6 +271,29 @@ const mokup_blog_item_list = [
 section {
   width: 60%;
 }
+.like-share-floatContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 160px;
+  width: 40px;
+  padding: 1rem;
+  border-radius: 10rem;
+  background-color: #f8f9fa;
+  .floatContainer-button {
+    display: flex;
+    padding: 0.75rem;
+    border-radius: 10rem;
+    background-color: #fff;
+    border: 1px solid #f8f9fa;
+    cursor: pointer;
+    transition: border 0.2s ease;
+    &:hover {
+      border: 1px solid black;
+    }
+  }
+}
 .title {
   font-size: 3rem;
   line-height: 1.5;
@@ -180,6 +313,7 @@ section {
   }
 }
 .detail-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -212,6 +346,14 @@ section {
         }
       }
     }
+  }
+  /** 광고 영역 */
+  .advertisement-container {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    width: 100%;
+    margin-top: 3rem;
   }
   .contents-footer {
     margin-top: 16rem;
@@ -255,6 +397,13 @@ section {
         }
       }
     }
+    .contect-writter-container {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      width: 100%;
+      margin-bottom: 6rem;
+    }
     .footer-second-container {
       display: flex;
       width: 100%;
@@ -283,7 +432,7 @@ section {
     padding: 4rem 0;
     background-color: #f8f9fa;
     box-shadow: rgba(0, 0, 0, 0.04) 0px -16px 16px;
-    z-index: 1;
+    z-index: 2;
     .interest-post-title {
       font-size: 2rem;
       text-align: center;
