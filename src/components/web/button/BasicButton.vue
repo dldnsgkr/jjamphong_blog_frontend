@@ -1,15 +1,26 @@
 <script setup lang="ts">
 type ButtonPropsType = {
   text: string;
-  class?: 'grassButton' | 'basicButton';
+  buttonStyle?: 'grassButton' | 'basicButton';
+  clickEvent?: (e: MouseEvent) => void;
+  type?: 'submit' | 'button';
 };
-const props = withDefaults(defineProps<ButtonPropsType>(), {
-  class: 'basicButton',
-});
+
+const {
+  text,
+  buttonStyle = 'basicButton',
+  type = 'button',
+} = defineProps<ButtonPropsType>();
 </script>
 
 <template>
-  <button :class="props.class">{{ props.text }}</button>
+  <button
+    :type="type"
+    :class="buttonStyle"
+    @click="clickEvent"
+  >
+    {{ text }}
+  </button>
 </template>
 
 <style scoped lang="scss">

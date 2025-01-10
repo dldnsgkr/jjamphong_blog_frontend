@@ -1,52 +1,80 @@
-<script setup>
+<script setup lang="ts">
 import ModalBackground from '@components/universal/ModalBackground.vue';
 import TeleportView from '@components/universal/TeleportView.vue';
 import Bell from '@components/web/icon/Bell.vue';
 import Search from '@components/web/icon/Search.vue';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import SearchBar from './input/SearchBar.vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import BasicButton from './button/BasicButton.vue';
+import { useModalStore } from '@stores/modalStore';
+import Login from './Login/Login.vue';
 
 const route = useRoute();
 
-const isSpecificRoute = route.path === '/';
+const router = useRouter();
 
-const activateBackground = ref(false);
+const { openModal, modalState } = useModalStore();
 
-function modalBackgroundHandler() {
-  activateBackground.value = !activateBackground.value;
+/** header UI 상태 조건 */
+const isSpecificRoute = ref(route.path === '/');
+
+/**
+ * search modal 활성화 function
+ */
+function openSearchModal() {
+  openModal(SearchBar);
 }
+
+/**
+ * main page로 이동
+ */
+function openLoginModal() {
+  openModal(Login);
+}
+
+/**
+ * header UI 상태 변경 watcher
+ */
+watch(
+  () => route.path,
+  (newPath) => {
+    isSpecificRoute.value = newPath === '/';
+  }
+);
 </script>
 
 <template>
   <header class="client-header">
     <div class="basic-header-wrapper">
-      <div class="logo">Eclectic Explorations</div>
+      <div
+        v-if="isSpecificRoute"
+        class="logo"
+        @click="router.push({ path: '/' })"
+      >
+        Eclectic Explorations
+      </div>
+      <div v-else class="logo">사용자임</div>
       <div class="function-wrapper">
-        <Search @click="modalBackgroundHandler" />
+        <Search @click="openSearchModal" />
         <Bell />
-        <BasicButton text="새 글 작성" />
-        <BasicButton text="팔로우" />
+        <BasicButton
+          text="로그인"
+          :click-event="() => openLoginModal()"
+        />
+        <!-- <BasicButton text="팔로우" /> -->
       </div>
     </div>
-    <div v-if="isSpecificRoute"></div>
   </header>
-  <TeleportView
-    :background-component="ModalBackground"
-    :activateBackground="activateBackground"
-    :modal-component="SearchBar"
-    :modalBackgroundHandler="modalBackgroundHandler"
-  ></TeleportView>
 </template>
 
 <style lang="scss">
 .client-header {
   display: flex;
   flex-direction: column;
-  padding: 0 4rem;
+  padding: 0 8%;
   @media (max-width: 768px) {
-    padding: 0 1rem;
+    padding: 0 2rem;
   }
   .basic-header-wrapper {
     display: flex;

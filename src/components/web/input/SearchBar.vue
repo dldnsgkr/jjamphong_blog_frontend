@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import iconSearch from '@assets/icon/icon-search.svg';
 import iconClose from '@assets/icon/icon-close.svg';
+import BlogItemBoxSkeleton from '../skeleton/BlogItemBoxSkeleton.vue';
 type SearchBarPropsType = {
   activateBackground: boolean;
 };
@@ -23,6 +24,13 @@ const closeModal = () => {
       :src="iconClose"
       @click="closeModal"
     />
+  </div>
+  <div class="search-list-wrapper">
+    <div class="search-list-sort">
+      <BlogItemBoxSkeleton />
+      <BlogItemBoxSkeleton />
+      <BlogItemBoxSkeleton />
+    </div>
   </div>
 </template>
 
@@ -69,6 +77,20 @@ const closeModal = () => {
     right: 6%;
     top: 38%;
     cursor: pointer;
+  }
+}
+.search-list-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 2rem;
+  .search-list-sort {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+    width: 79.2%;
   }
 }
 </style>

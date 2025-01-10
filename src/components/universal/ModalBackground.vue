@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import BlogItemBoxSkeleton from '@components/web/skeleton/BlogItemBoxSkeleton.vue';
 import { watch, type Component } from 'vue';
 type ModalBackgroundPropsType = {
   activateBackground: boolean;
@@ -31,13 +30,6 @@ watch(
         :activateBackground="activateBackground"
         @close="modalBackgroundHandler"
       />
-      <div class="search-list-wrapper">
-        <div class="search-list-sort">
-          <BlogItemBoxSkeleton />
-          <BlogItemBoxSkeleton />
-          <BlogItemBoxSkeleton />
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -68,20 +60,6 @@ watch(
   .modal-wrapper {
     width: 100%;
     height: 100%;
-    .search-list-wrapper {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      margin-top: 2rem;
-      .search-list-sort {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        gap: 2rem;
-        width: 79.2%;
-      }
-    }
   }
 }
 </style>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { Teleport, type Component } from 'vue';
+import { Teleport, watch, type Component } from 'vue';
 type TeleportViewPropsType = {
   backgroundComponent: Component;
   activateBackground: boolean;
-  modalComponent: Component;
+  modalComponent?: Component;
   modalBackgroundHandler: () => void;
 };
 const props = defineProps<TeleportViewPropsType>();

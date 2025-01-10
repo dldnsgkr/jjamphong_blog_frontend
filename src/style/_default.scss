@@ -16,9 +16,9 @@
   display: grid;
   grid-template-columns: repeat(5, minmax(200px, 1fr));
   gap: 2rem;
-  padding: 0 4rem;
+  padding: 0 8%;
   @media (max-width: 768px) {
-    padding: 0 1rem;
+    padding: 0 2rem;
   }
   @media (max-width: 1919px) {
     grid-template-columns: repeat(4, minmax(200px, 1fr));
