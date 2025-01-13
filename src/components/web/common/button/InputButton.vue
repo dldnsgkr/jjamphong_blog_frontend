@@ -5,18 +5,20 @@ type ButtonPropsType = {
   animationtype?: 'bright';
   width?: string;
 };
-const props = withDefaults(defineProps<ButtonPropsType>(), {
-  color: 'basic',
-  width: '6rem',
-});
+const {
+  color = 'basic',
+  width = '6rem',
+  animationtype,
+  text,
+} = defineProps<ButtonPropsType>();
 </script>
 
 <template>
   <button
-    :class="[props.color, props.animationtype]"
+    :class="[color, animationtype]"
     :style="{ width }"
   >
-    {{ props.text }}
+    {{ text }}
   </button>
 </template>
 

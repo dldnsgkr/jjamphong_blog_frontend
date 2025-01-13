@@ -2,10 +2,7 @@
 type FloatAreaPropsType = {
   fillColor?: string;
 };
-const props = withDefaults(
-  defineProps<FloatAreaPropsType>(),
-  {}
-);
+const { fillColor } = defineProps<FloatAreaPropsType>();
 </script>
 
 <template>
@@ -15,7 +12,7 @@ const props = withDefaults(
     height="24"
     viewBox="0 0 24 24"
     :style="{
-      fill: props.fillColor,
+      fill: fillColor,
       transition: 'fill 0.1s ease',
     }"
   >

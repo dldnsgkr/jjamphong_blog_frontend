@@ -4,21 +4,19 @@ type TextAreaPropsType = {
   width?: string;
   height?: string;
 };
-const props = withDefaults(
-  defineProps<TextAreaPropsType>(),
-  {
-    width: '100%',
-    height: '100px',
-  }
-);
+const {
+  placeholder,
+  width = '100%',
+  height = '100px',
+} = defineProps<TextAreaPropsType>();
 </script>
 
 <template>
   <textarea
-    :placeholder="props.placeholder"
+    :placeholder="placeholder"
     :style="{
-      width: props.width,
-      height: props.height,
+      width: width,
+      height: height,
       resize: 'none',
       border: '1px solid #F1F3F5',
       borderRadius: '0.5rem',

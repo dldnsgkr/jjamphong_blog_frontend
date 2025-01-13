@@ -1,0 +1,43 @@
+<script setup lang="ts">
+import { useModalStore } from '@stores/modalStore';
+import CloseX from '../icon/CloseX.vue';
+
+type DialogContainerType = {
+  width?: string;
+  height?: string;
+  disCloseBtn?: boolean;
+};
+
+const { width = '60%', height = '40%' } =
+  defineProps<DialogContainerType>();
+
+const { handleModalState } = useModalStore();
+
+handleModalState;
+</script>
+
+<template>
+  <section
+    class="dialog-container"
+    :style="{ width, height }"
+  >
+    <CloseX
+      class="icon-close"
+      @click="handleModalState"
+      :fillColor="'rgba(88, 101, 242, 0.5)'"
+    />
+    <slot />
+  </section>
+</template>
+
+<style scoped lang="scss">
+.dialog-container {
+  position: relative;
+  background-color: #fff;
+}
+.icon-close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+</style>

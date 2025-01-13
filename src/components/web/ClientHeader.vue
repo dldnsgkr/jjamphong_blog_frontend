@@ -1,20 +1,18 @@
 <script setup lang="ts">
-import ModalBackground from '@components/universal/ModalBackground.vue';
-import TeleportView from '@components/universal/TeleportView.vue';
-import Bell from '@components/web/icon/Bell.vue';
-import Search from '@components/web/icon/Search.vue';
+import Bell from '@components/web/common/icon/Bell.vue';
+import Search from '@components/web/common/icon/Search.vue';
 import { ref, watch } from 'vue';
-import SearchBar from './input/SearchBar.vue';
+import SearchBar from './DialogView/SearchBar.vue';
 import { useRoute, useRouter } from 'vue-router';
-import BasicButton from './button/BasicButton.vue';
+import BasicButton from './common/button/BasicButton.vue';
 import { useModalStore } from '@stores/modalStore';
-import Login from './Login/Login.vue';
+import Login from './DialogView/Login/Login.vue';
 
 const route = useRoute();
 
 const router = useRouter();
 
-const { openModal, modalState } = useModalStore();
+const { openModal } = useModalStore();
 
 /** header UI 상태 조건 */
 const isSpecificRoute = ref(route.path === '/');

@@ -14,7 +14,7 @@ type mokup_blog_item_listPropsType = {
   like_count: number;
 };
 
-const props = defineProps<{
+const { mokup_blog_item_list } = defineProps<{
   mokup_blog_item_list: mokup_blog_item_listPropsType;
 }>();
 
@@ -22,7 +22,7 @@ const router = useRouter();
 
 const navigateToBlogItem = async () => {
   await router.push({
-    path: `/item/${props.mokup_blog_item_list.id}`,
+    path: `/item/${mokup_blog_item_list.id}`,
   });
 };
 
@@ -80,25 +80,25 @@ const navigateToBlogItem = async () => {
   >
     <div class="blog-item-image-wrapper">
       <img
-        v-if="props.mokup_blog_item_list.img"
-        :src="props.mokup_blog_item_list.img"
+        v-if="mokup_blog_item_list.img"
+        :src="mokup_blog_item_list.img"
         alt="Blog Image"
       />
     </div>
     <div class="blog-item-text">
       <div class="title-wrapper">
         <p class="main-title">
-          {{ props.mokup_blog_item_list.title }}
+          {{ mokup_blog_item_list.title }}
         </p>
         <p class="sub-title">
-          {{ props.mokup_blog_item_list.sub_title }}
+          {{ mokup_blog_item_list.sub_title }}
         </p>
       </div>
       <div class="etc-wrapper">
         <p class="date-comment">
-          {{ props.mokup_blog_item_list.current_date }} ·
+          {{ mokup_blog_item_list.current_date }} ·
           {{
-            props.mokup_blog_item_list.comment_count.toLocaleString()
+            mokup_blog_item_list.comment_count.toLocaleString()
           }}개의 댓글
         </p>
       </div>
@@ -109,15 +109,15 @@ const navigateToBlogItem = async () => {
         <div class="writer-name">
           <span>by </span>
           <p>
-            {{ props.mokup_blog_item_list.nickName }}
-            {{ props.mokup_blog_item_list.writer }}
+            {{ mokup_blog_item_list.nickName }}
+            {{ mokup_blog_item_list.writer }}
           </p>
         </div>
       </div>
       <div class="like-value">
         <img :src="icon_black_heart" />
         {{
-          props.mokup_blog_item_list.like_count.toLocaleString()
+          mokup_blog_item_list.like_count.toLocaleString()
         }}
       </div>
     </div>

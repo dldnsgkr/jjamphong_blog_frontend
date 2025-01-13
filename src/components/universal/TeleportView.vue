@@ -6,15 +6,20 @@ type TeleportViewPropsType = {
   modalComponent?: Component;
   modalBackgroundHandler: () => void;
 };
-const props = defineProps<TeleportViewPropsType>();
+const {
+  backgroundComponent,
+  modalBackgroundHandler,
+  modalComponent,
+  activateBackground,
+} = defineProps<TeleportViewPropsType>();
 </script>
 
 <template>
   <Teleport to="body">
     <component
-      :is="props.backgroundComponent"
-      :activateBackground="props.activateBackground"
-      :modalComponent="props.modalComponent"
+      :is="backgroundComponent"
+      :activateBackground="activateBackground"
+      :modalComponent="modalComponent"
       :modalBackgroundHandler="modalBackgroundHandler"
     />
   </Teleport>

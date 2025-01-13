@@ -1,7 +1,10 @@
 <script setup lang="ts">
 type ButtonPropsType = {
   text: string;
-  buttonStyle?: 'grassButton' | 'basicButton';
+  buttonStyle?:
+    | 'grassButton'
+    | 'basicButton'
+    | 'round-button';
   clickEvent?: (e: MouseEvent) => void;
   type?: 'submit' | 'button';
 };

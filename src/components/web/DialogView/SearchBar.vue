@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import iconSearch from '@assets/icon/icon-search.svg';
-import iconClose from '@assets/icon/icon-close.svg';
-import BlogItemBoxSkeleton from '../skeleton/BlogItemBoxSkeleton.vue';
+import BlogItemBoxSkeleton from '../common/skeleton/BlogItemBoxSkeleton.vue';
+import CloseX from '../common/icon/CloseX.vue';
 type SearchBarPropsType = {
   activateBackground: boolean;
 };
 
-const props = defineProps<SearchBarPropsType>();
+const { activateBackground } =
+  defineProps<SearchBarPropsType>();
 const emit = defineEmits();
 const closeModal = () => {
   emit('close');
@@ -14,28 +15,30 @@ const closeModal = () => {
 </script>
 
 <template>
-  <div class="search-bar-wrapper">
-    <div class="search-bar-aria">
-      <img class="icon-search" :src="iconSearch" />
-      <input placeholder="검색어를 입력해주세요." />
+  <div class="search-wrapper">
+    <div class="search-bar-wrapper">
+      <div class="search-bar-aria">
+        <img class="icon-search" :src="iconSearch" />
+        <input placeholder="검색어를 입력해주세요." />
+      </div>
+      <CloseX class="icon-close" @click="closeModal" />
     </div>
-    <img
-      class="icon-close"
-      :src="iconClose"
-      @click="closeModal"
-    />
-  </div>
-  <div class="search-list-wrapper">
-    <div class="search-list-sort">
-      <BlogItemBoxSkeleton />
-      <BlogItemBoxSkeleton />
-      <BlogItemBoxSkeleton />
+    <div class="search-list-wrapper">
+      <div class="search-list-sort">
+        <BlogItemBoxSkeleton />
+        <BlogItemBoxSkeleton />
+        <BlogItemBoxSkeleton />
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+.search-wrapper {
+  width: 100%;
+}
 .search-bar-wrapper {
+  position: relative;
   width: 100%;
   height: 50%;
   display: flex;
@@ -43,13 +46,14 @@ const closeModal = () => {
   align-items: end;
   .search-bar-aria {
     position: relative;
-    width: 70%;
-    height: 3.5rem;
+    width: 79.2%;
+    height: 5rem;
     padding: 0.5rem;
     padding-left: 5rem;
     background: #ffffff;
     border-radius: 2px;
     border: 1px solid #f3f3f3;
+    box-sizing: border-box;
     .icon-search {
       position: absolute;
       left: 0.8rem;
@@ -72,10 +76,10 @@ const closeModal = () => {
   }
   .icon-close {
     position: absolute;
-    width: 4%;
-    height: 4%;
-    right: 6%;
-    top: 38%;
+    width: 3rem;
+    height: 3rem;
+    right: 4.5rem;
+    bottom: 3.5rem;
     cursor: pointer;
   }
 }

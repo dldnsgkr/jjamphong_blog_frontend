@@ -4,13 +4,10 @@ import { computed } from 'vue';
 type IconPropsType = {
   isHover?: boolean;
 };
-const props = withDefaults(
-  defineProps<IconPropsType>(),
-  {}
-);
+const { isHover } = defineProps<IconPropsType>();
 
 const gradientStops = computed(() => {
-  const opacity = props.isHover ? 1 : 0.5;
+  const opacity = isHover ? 1 : 0.5;
 
   return [
     {

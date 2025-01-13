@@ -3,19 +3,13 @@ type ButtonPropsType = {
   text: string;
   link: string;
 };
-const props = withDefaults(
-  defineProps<ButtonPropsType>(),
-  {}
-);
+const { text, link } = defineProps<ButtonPropsType>();
 </script>
 
 <template>
-  <RouterLink
-    :to="props.link"
-    style="text-decoration: none"
-  >
+  <RouterLink :to="link" style="text-decoration: none">
     <span class="round-tag">
-      {{ props.text }}
+      {{ text }}
     </span></RouterLink
   >
 </template>

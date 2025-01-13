@@ -5,10 +5,14 @@ type ModalBackgroundPropsType = {
   modalComponent: Component;
   modalBackgroundHandler: () => void;
 };
-const props = defineProps<ModalBackgroundPropsType>();
+const {
+  activateBackground,
+  modalComponent,
+  modalBackgroundHandler,
+} = defineProps<ModalBackgroundPropsType>();
 // Watch for changes in activateBackground
 watch(
-  () => props.activateBackground,
+  () => activateBackground,
   (newValue) => {
     if (newValue) {
       document.body.style.overflow = 'hidden';
@@ -26,7 +30,7 @@ watch(
   >
     <div class="modal-wrapper">
       <component
-        :is="props.modalComponent"
+        :is="modalComponent"
         :activateBackground="activateBackground"
         @close="modalBackgroundHandler"
       />
@@ -60,6 +64,10 @@ watch(
   .modal-wrapper {
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 }
 </style>

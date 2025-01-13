@@ -2,10 +2,7 @@
 type IconPropsType = {
   fillColor?: string;
 };
-const props = withDefaults(
-  defineProps<IconPropsType>(),
-  {}
-);
+const { fillColor } = defineProps<IconPropsType>();
 </script>
 
 <template>
@@ -15,7 +12,7 @@ const props = withDefaults(
     height="36"
     viewBox="0 0 24 24"
     :style="{
-      fill: props.fillColor,
+      fill: fillColor,
       transition: 'fill 0.3s ease',
       cursor: 'pointer',
     }"

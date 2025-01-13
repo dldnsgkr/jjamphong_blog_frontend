@@ -6,18 +6,16 @@ type ButtonPropsType = {
   marginBottom?: string;
 };
 
-const props = withDefaults(defineProps<ButtonPropsType>(), {
-  marginTop: '2rem',
-  marginBottom: '1.5rem',
-});
+const { marginBottom = '1.5rem', marginTop = '2rem' } =
+  defineProps<ButtonPropsType>();
 </script>
 
 <template>
   <div
     class="underLine"
     :style="{
-      marginTop: props.marginTop,
-      marginBottom: props.marginBottom,
+      marginTop: marginTop,
+      marginBottom: marginBottom,
     }"
   ></div>
 </template>

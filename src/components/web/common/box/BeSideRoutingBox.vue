@@ -5,40 +5,32 @@ type ButtonPropsType = {
   title: string;
   align: 'left' | 'right';
 };
-const props = withDefaults(
-  defineProps<ButtonPropsType>(),
-  {}
-);
+const { title, align } = defineProps<ButtonPropsType>();
 </script>
 
 <template>
   <div class="box-container">
     <div
       class="arrow-tag"
-      :class="props.align"
+      :class="align"
       v-if="align == 'left'"
     >
-      <Arrow :rotate="props.align" />
+      <Arrow :rotate="align" />
     </div>
     <div class="text-container">
-      <p
-        class="align-text"
-        :style="{ textAlign: props.align }"
-      >
+      <p class="align-text" :style="{ textAlign: align }">
         {{
-          props.align == 'left'
-            ? '이전 포스트'
-            : '다음 포스트'
+          align == 'left' ? '이전 포스트' : '다음 포스트'
         }}
       </p>
-      <h3>{{ props.title }}</h3>
+      <h3>{{ title }}</h3>
     </div>
     <div
       class="arrow-tag"
-      :class="props.align"
+      :class="align"
       v-if="align === 'right'"
     >
-      <Arrow :rotate="props.align" />
+      <Arrow :rotate="align" />
     </div>
   </div>
 </template>

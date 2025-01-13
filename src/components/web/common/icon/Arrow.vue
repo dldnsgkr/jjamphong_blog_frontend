@@ -4,13 +4,10 @@ import { computed } from 'vue';
 type ArrowPropsType = {
   rotate: 'left' | 'right' | 'top' | 'bottom';
 };
-const props = withDefaults(
-  defineProps<ArrowPropsType>(),
-  {}
-);
+const { rotate } = defineProps<ArrowPropsType>();
 
 const computedRotation = computed(() => {
-  switch (props.rotate) {
+  switch (rotate) {
     case 'left':
       return 'rotate(0deg)';
     case 'right':

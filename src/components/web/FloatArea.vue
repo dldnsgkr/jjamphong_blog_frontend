@@ -4,23 +4,20 @@ type FloatAreaPropsType = {
   right?: string;
   left?: string;
 };
-const props = withDefaults(
-  defineProps<FloatAreaPropsType>(),
-  {
-    top: '0px',
-    left: '0px',
-    right: '0px',
-  }
-);
+const {
+  top = '0px',
+  left = '0px',
+  right = '0px',
+} = defineProps<FloatAreaPropsType>();
 </script>
 
 <template>
   <div
     class="sticky-container"
     :style="{
-      top: props.top,
-      left: props.left,
-      right: props.right,
+      top: top,
+      left: left,
+      right: right,
     }"
   >
     <slot></slot>

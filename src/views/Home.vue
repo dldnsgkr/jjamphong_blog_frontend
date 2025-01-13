@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import BlogItemBox from '@components/web/box/BlogItemBox.vue';
-import BlogItemBoxSkeleton from '@components/web/skeleton/BlogItemBoxSkeleton.vue';
+import BlogItemBox from '@components/web/common/box/BlogItemBox.vue';
+import BlogItemBoxSkeleton from '@components/web/common/skeleton/BlogItemBoxSkeleton.vue';
 import mokup_image1 from '@assets/img/mokup_blog_item.png';
 import mokup_image2 from '@assets/img/mokup_blog_item2.png';
 import mokup_image3 from '@assets/img/mokup_blog_item3.png';

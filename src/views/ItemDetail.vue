@@ -1,26 +1,26 @@
 <script setup lang="ts">
-import BeSideRoutingBox from '@components/web/box/BeSideRoutingBox.vue';
-import BasicButton from '@components/web/button/BasicButton.vue';
-import InputButton from '@components/web/button/InputButton.vue';
+import BeSideRoutingBox from '@components/web/common/box/BeSideRoutingBox.vue';
+import BasicButton from '@components/web/common/button/BasicButton.vue';
+import InputButton from '@components/web/common/button/InputButton.vue';
 import Contour from '@components/web/Contour.vue';
-import BasicTextArea from '@components/web/input/BasicTextArea.vue';
-import LinkTag from '@components/web/tag/LinkTag.vue';
-import BlogItemBox from '@components/web/box/BlogItemBox.vue';
-import BlogItemBoxSkeleton from '@components/web/skeleton/BlogItemBoxSkeleton.vue';
+import BasicTextArea from '@components/web/common/input/BasicTextArea.vue';
+import LinkTag from '@components/web/common/tag/LinkTag.vue';
+import BlogItemBox from '@components/web/common/box/BlogItemBox.vue';
+import BlogItemBoxSkeleton from '@components/web/common/skeleton/BlogItemBoxSkeleton.vue';
 import mokup_image1 from '@assets/img/mokup_blog_item.png';
 import mokup_image2 from '@assets/img/mokup_blog_item2.png';
 import mokup_image3 from '@assets/img/mokup_blog_item3.png';
 import FloatArea from '@components/web/FloatArea.vue';
-import Heart from '@components/web/icon/Heart.vue';
+import Heart from '@components/web/common/icon/Heart.vue';
 import { reactive, ref } from 'vue';
-import Share from '@components/web/icon/Share.vue';
-import Instagram from '@components/web/icon/Instagram.vue';
-import Slack from '@components/web/icon/Slack.vue';
-import Discord from '@components/web/icon/Discord.vue';
-import Github from '@components/web/icon/Github.vue';
-import Phone from '@components/web/icon/Phone.vue';
-import Facebook from '@components/web/icon/Facebook.vue';
-import Email from '@components/web/icon/Email.vue';
+import Share from '@components/web/common/icon/Share.vue';
+import Instagram from '@components/web/common/icon/Instagram.vue';
+import Slack from '@components/web/common/icon/Slack.vue';
+import Discord from '@components/web/common/icon/Discord.vue';
+import Github from '@components/web/common/icon/Github.vue';
+import Phone from '@components/web/common/icon/Phone.vue';
+import Facebook from '@components/web/common/icon/Facebook.vue';
+import Email from '@components/web/common/icon/Email.vue';
 
 const mokup_blog_item_list = [
   {
