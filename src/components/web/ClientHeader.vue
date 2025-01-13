@@ -2,7 +2,7 @@
 import Bell from '@components/web/common/icon/Bell.vue';
 import Search from '@components/web/common/icon/Search.vue';
 import { ref, watch } from 'vue';
-import SearchBar from './DialogView/SearchBar.vue';
+import SearchBar from './dialogView/SearchBar.vue';
 import { useRoute, useRouter } from 'vue-router';
 import BasicButton from './common/button/BasicButton.vue';
 import { useModalStore } from '@stores/modalStore';
