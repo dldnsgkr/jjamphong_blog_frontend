@@ -13,7 +13,10 @@
       "@router/*": ["router/*"],
       "@stores/*": ["stores/*"],
       "@style/*": ["style/*"],
-      "@views/*": ["views/*"]
+      "@views/*": ["views/*"],
+      "@utils/*": ["utils/*"],
+      "@api/*": ["api/*"],
+      "@types/*": ["types/*"]
     },
     "types": ["vite/client"]
   }

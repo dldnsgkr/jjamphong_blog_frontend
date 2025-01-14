@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --mode development",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
@@ -12,11 +12,13 @@
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.25.1",
+    "@vee-validate/zod": "^4.15.0",
     "@vue/compiler-sfc": "^3.5.13",
     "eslint": "^9.9.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-vue": "^9.27.0",
+    "ky": "^1.7.4",
     "node-sass": "^9.0.0",
     "pinia": "^2.2.2",
     "prettier": "^3.3.3",

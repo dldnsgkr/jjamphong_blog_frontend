@@ -6,7 +6,7 @@ import SearchBar from './dialogView/SearchBar.vue';
 import { useRoute, useRouter } from 'vue-router';
 import BasicButton from './common/button/BasicButton.vue';
 import { useModalStore } from '@stores/modalStore';
-import Login from './DialogView/Login/Login.vue';
+import Login from './dialogView/author/Login.vue';
 
 const route = useRoute();
 

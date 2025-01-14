@@ -6,6 +6,11 @@ import LoginImage from './LoginImage.vue';
 import Github from '@components/web/common/icon/Github.vue';
 import Facebook from '@components/web/common/icon/Facebook.vue';
 import Google from '@components/web/common/icon/Google.vue';
+import { getRequest } from '@utils/httpsClient';
+
+const testApi = () => {
+  getRequest('users/12');
+};
 </script>
 
 <template>
@@ -35,6 +40,7 @@ import Google from '@components/web/common/icon/Google.vue';
         <BasicButton
           text="로그인"
           button-style="grassButton"
+          :click-event="() => testApi()"
         />
         <div class="social-login-form">
           <h4>소셜 계정으로 로그인</h4>

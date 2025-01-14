@@ -26,6 +26,15 @@ export default defineConfig({
       '@views': fileURLToPath(
         new URL('./src/views', import.meta.url)
       ),
+      '@utils': fileURLToPath(
+        new URL('./src/utils', import.meta.url)
+      ),
+      '@api': fileURLToPath(
+        new URL('./src/api', import.meta.url)
+      ),
+      '@types': fileURLToPath(
+        new URL('./src/types', import.meta.url)
+      ),
     },
   },
 });
