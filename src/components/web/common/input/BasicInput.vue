@@ -3,16 +3,29 @@ type InputPropsType = {
   type?: 'text' | 'password' | 'number' | 'email';
   inputStyle?: 'basic-input' | 'login-input';
   placeholder?: string;
+  modelValue?: any;
 };
+
 const {
   type = 'text',
   inputStyle = 'basic-input',
   placeholder,
+  modelValue,
 } = defineProps<InputPropsType>();
+const emit = defineEmits<{
+  (event: 'update:modelValue', value: string): void;
+}>();
+
+const handleInput = (event: Event) => {
+  const input = event.target as HTMLInputElement;
+  emit('update:modelValue', input.value);
+};
 </script>
 
 <template>
   <input
+    :value="modelValue"
+    @input="handleInput"
     :type="type"
     :class="inputStyle"
     :placeholder="placeholder"

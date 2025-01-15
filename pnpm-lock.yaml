@@ -47,6 +47,9 @@ importers:
       sass-loader:
         specifier: ^16.0.1
         version: 16.0.1(node-sass@9.0.0)(sass@1.77.8)
+      vee-validate:
+        specifier: ^4.15.0
+        version: 4.15.0(vue@3.5.13(typescript@5.4.5))
       vue:
         specifier: 3.5.13
         version: 3.5.13(typescript@5.4.5)
@@ -56,6 +59,9 @@ importers:
       vue-router:
         specifier: ^4.3.3
         version: 4.4.3(vue@3.5.13(typescript@5.4.5))
+      zod:
+        specifier: ^3.24.1
+        version: 3.24.1
     devDependencies:
       '@tsconfig/node20':
         specifier: ^20.1.4

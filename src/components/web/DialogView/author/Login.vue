@@ -7,10 +7,34 @@ import Github from '@components/web/common/icon/Github.vue';
 import Facebook from '@components/web/common/icon/Facebook.vue';
 import Google from '@components/web/common/icon/Google.vue';
 import { getRequest } from '@utils/httpsClient';
+import { useField, useForm } from 'vee-validate';
+import { toTypedSchema } from '@vee-validate/zod';
+import { LoginSchema } from '@schema/Login.schema';
+import ErrorText from '@components/web/common/ErrorText.vue';
+
+const { values, errors, handleSubmit, defineField } =
+  useForm({
+    validationSchema: toTypedSchema(LoginSchema),
+    initialValues: {
+      loginId: '',
+      password: '',
+    },
+  });
+
+const [loginId, loginIdAttrs] = defineField('loginId');
+const [password, passwordAttrs] = defineField('password');
+
+// useField을 통해 필드 정의
+// const { value: loginId } = useField('loginId');
+// const { value: password } = useField('password');
 
 const testApi = () => {
   getRequest('users/12');
 };
+
+const onSubmit = handleSubmit((values) => {
+  alert(JSON.stringify(values, null, 2));
+});
 </script>
 
 <template>
@@ -20,14 +44,16 @@ const testApi = () => {
         <LoginImage />
         <p>환영합니다!</p>
       </div>
-      <div class="login-form-container">
+      <form @submit="onSubmit" class="login-form-container">
         <h3>로그인</h3>
         <div class="login-form">
           <h4>ID or Email</h4>
           <BasicInput
             input-style="login-input"
             placeholder="Login"
+            v-model="loginId"
           />
+          <ErrorText :text="errors.loginId" />
         </div>
         <div class="login-form">
           <h4>Password</h4>
@@ -35,9 +61,12 @@ const testApi = () => {
             type="password"
             input-style="login-input"
             placeholder="Password"
+            v-model="password"
           />
+          <ErrorText :text="errors.password" />
         </div>
         <BasicButton
+          type="submit"
           text="로그인"
           button-style="grassButton"
           :click-event="() => testApi()"
@@ -50,7 +79,7 @@ const testApi = () => {
             <Facebook fill-color="rgb(59, 89, 152)" />
           </div>
         </div>
-      </div>
+      </form>
       <p class="form-switching">
         aldjhskfa;slfja;sldflad;sfjasdl;fjalsd;
       </p>
@@ -93,7 +122,7 @@ const testApi = () => {
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 1.5rem;
     }
     .social-login-form {
       display: flex;

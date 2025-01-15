@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BeSideRoutingBox from '@components/web/common/box/BeSideRoutingBox.vue';
+import BeSideRoutingBox from '@components/web/common/button/BeSideRoutingButton.vue';
 import BasicButton from '@components/web/common/button/BasicButton.vue';
 import InputButton from '@components/web/common/button/InputButton.vue';
 import Contour from '@components/web/Contour.vue';
