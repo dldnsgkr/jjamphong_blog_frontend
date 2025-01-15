@@ -28,7 +28,6 @@ async function httpClientFunction({
   body?: RequestBodyType;
 }) {
   try {
-    console.log(import.meta.env);
     const response = await ky(url, {
       method: requestMethod,
       json: body,

@@ -1,5 +1,8 @@
 import { z } from 'zod';
 
+/**
+ * 일반 로그인 스키마
+ */
 export const LoginSchema = z.object({
   loginId: z
     .string()

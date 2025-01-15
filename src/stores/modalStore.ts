@@ -29,6 +29,9 @@ export const useModalStore = defineStore('modal', () => {
     }
   }
 
+  /**
+   * modal 여는 action(component setting 까지 포함)
+   */
   function openModal(component: Component) {
     handleModalView(component);
     handleModalState();

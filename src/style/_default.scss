@@ -1,17 +1,3 @@
-.header-button {
-  padding: 0.5rem 1rem;
-  border: 1px solid black;
-  border-radius: 2rem;
-  transition:
-    color 0.3s ease,
-    background 0.3s ease;
-  cursor: pointer;
-  &:hover {
-    color: #ffffff;
-    background: black;
-  }
-}
-
 .list-container {
   display: grid;
   grid-template-columns: repeat(5, minmax(200px, 1fr));
