@@ -57,7 +57,9 @@ watch(
         <Search @click="openSearchModal" />
         <Bell />
         <BasicButton
+          type="button"
           text="로그인"
+          button-style="basicButton"
           :click-event="() => openLoginModal()"
         />
         <!-- <BasicButton text="팔로우" /> -->

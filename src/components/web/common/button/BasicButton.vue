@@ -1,25 +1,33 @@
 <script setup lang="ts">
 type ButtonPropsType = {
   text: string;
+  buttonRound?: 'round-sm' | 'round-lg';
   buttonStyle?:
-    | 'grassButton'
+    | 'basic'
+    | 'transparent'
     | 'basicButton'
-    | 'round-button';
+    | 'grassButton';
+  animationtype?:
+    | 'bright'
+    | 'darken'
+    | 'darken-transparent';
+  width?: string;
   clickEvent?: (e: MouseEvent) => void;
   type?: 'submit' | 'button';
 };
-
 const {
+  buttonRound = 'round-lg',
+  buttonStyle = 'basic',
+  width,
+  animationtype = '',
   text,
-  buttonStyle = 'basicButton',
-  type = 'button',
 } = defineProps<ButtonPropsType>();
 </script>
 
 <template>
   <button
-    :type="type"
-    :class="buttonStyle"
+    :class="[buttonStyle, animationtype, buttonRound]"
+    :style="{ width }"
     @click="clickEvent"
   >
     {{ text }}
@@ -27,34 +35,62 @@ const {
 </template>
 
 <style scoped lang="scss">
-.round-button {
-  height: 2rem;
-  padding: 0.5rem 1rem;
-  border-radius: 2rem;
+button {
+  cursor: pointer;
   transition:
     color 0.3s ease,
     background 0.3s ease;
-  cursor: pointer;
+}
+// buttonRound
+.round-lg {
+  height: 2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+}
+
+.round-sm {
+  height: 2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+}
+
+// buttonStyle
+.basic {
+  color: #fff;
+  background-color: #12b886;
+  border: none;
+}
+
+.transparent {
+  background-color: transparent;
+  color: #12b886;
+  border: none;
 }
 
 .basicButton {
-  @extend .round-button;
   border: 1px solid black;
   background-color: #ffffff;
   &:hover {
     color: #ffffff;
-    background: black;
+    background-color: black;
   }
 }
 
 .grassButton {
-  @extend .round-button;
   border: 1px solid #12b886;
   color: #12b886;
   background-color: #ffffff;
   &:hover {
     color: #ffffff;
-    background: #12b886;
+    background-color: #12b886;
+  }
+}
+
+// animationtype
+.darken-transparent {
+  transition: background 0.3s ease;
+  &:hover {
+    background: #e0e0e0;
   }
 }
 </style>

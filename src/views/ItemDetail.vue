@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import BeSideRoutingBox from '@components/web/common/button/BeSideRoutingButton.vue';
 import BasicButton from '@components/web/common/button/BasicButton.vue';
-import InputButton from '@components/web/common/button/InputButton.vue';
 import Contour from '@components/web/Contour.vue';
 import BasicTextArea from '@components/web/common/input/BasicTextArea.vue';
 import LinkTag from '@components/web/common/tag/LinkTag.vue';
@@ -148,7 +147,10 @@ const hover = reactive({
             ·
             <p class="written-date">2025년 01월 04일</p>
           </div>
-          <BasicButton text="팔로우" class="grassButton" />
+          <BasicButton
+            text="팔로우"
+            buttonStyle="grassButton"
+          />
         </div>
         <div class="tag-container">
           <LinkTag text="Vue" link="/asdf" />
@@ -176,7 +178,10 @@ const hover = reactive({
           </div>
           <p class="writter">lee un hak</p>
         </div>
-        <BasicButton text="팔로우" class="grassButton" />
+        <BasicButton
+          text="팔로우"
+          buttonStyle="grassButton"
+        />
       </div>
       <Contour />
       <div class="contect-writter-container">
@@ -243,7 +248,8 @@ const hover = reactive({
       <div class="comment-writing-area">
         <BasicTextArea placeholder="댓글을 작성하세요." />
       </div>
-      <InputButton
+      <BasicButton
+        button-round="round-sm"
         text="댓글 작성"
         animationtype="bright"
       />
@@ -369,20 +375,6 @@ section {
         .writter-image {
           width: 108px;
           height: 108px;
-          overflow: hidden;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          border: solid 1px rgba(0, 0, 0, 0.2);
-          border-radius: 10rem;
-          cursor: pointer;
-          transition: transform 0.3s ease;
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-          }
           &:hover {
             transform: scale(1.1);
           }

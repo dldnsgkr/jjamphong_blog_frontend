@@ -22,3 +22,24 @@
     grid-template-columns: repeat(1, minmax(200px, 1fr));
   }
 }
+
+.switching-text {
+  color: #12b886;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+// animationtype
+.bright {
+  transition: filter 0.3s ease;
+  &:hover {
+    filter: brightness(1.1);
+  }
+}
+
+.darken {
+  transition: filter 0.3s ease;
+  &:hover {
+    filter: brightness(0.8);
+  }
+}

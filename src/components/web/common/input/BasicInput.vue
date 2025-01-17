@@ -34,6 +34,13 @@ const handleInput = (event: Event) => {
 
 <style scoped lang="scss">
 .basic-input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #dee2e6;
+  &:focus {
+    outline: none;
+    border-color: black;
+  }
 }
 .login-input {
   padding: 1rem;
