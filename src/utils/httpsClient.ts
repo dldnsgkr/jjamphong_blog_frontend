@@ -1,3 +1,7 @@
+import type {
+  ErrorResponse,
+  ResponseType,
+} from 'types/httpsClients.type';
 import ky, { HTTPError } from 'ky';
 
 type RequestMethodType =
@@ -16,7 +20,7 @@ function attachCustomeHeaders(request: Request) {
   request.headers.set('X-Foo', 'foo');
 }
 
-async function httpClientFunction({
+async function httpClientFunction<T>({
   requestMethod,
   url,
   searchParams,
@@ -26,7 +30,7 @@ async function httpClientFunction({
   url: string;
   searchParams?: searchParamsType;
   body?: RequestBodyType;
-}) {
+}): Promise<ResponseType<T>> {
   try {
     const response = await ky(url, {
       method: requestMethod,
@@ -36,23 +40,31 @@ async function httpClientFunction({
       hooks: {
         beforeRequest: [attachCustomeHeaders],
       },
-    }).json();
+    }).json<ResponseType<T>>();
 
-    console.log(response);
+    return response;
   } catch (err) {
-    console.log(err as HTTPError);
+    // 에러를 명확히 타입으로 처리
+    const error = err as HTTPError;
+    const errorResponse =
+      (await error.response.json()) as ErrorResponse;
+
+    console.error('HTTP Error:', errorResponse);
+
+    throw errorResponse; // 필요 시 호출자가 처리할 수 있도록 던짐
   }
 }
 
-export const getRequest = (
+export const getRequest = async <T>(
   url: string,
   searchParams?: searchParamsType
-) =>
-  httpClientFunction({
+): Promise<ResponseType<T>> => {
+  return await httpClientFunction<T>({
     requestMethod: 'GET',
     url,
     searchParams,
   });
+};
 
 export const postRequest = (
   url: string,

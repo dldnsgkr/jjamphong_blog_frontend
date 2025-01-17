@@ -49,7 +49,6 @@ button {
 }
 
 .round-sm {
-  height: 2rem;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
 }

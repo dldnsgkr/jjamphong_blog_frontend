@@ -16,7 +16,6 @@
       "@views/*": ["views/*"],
       "@utils/*": ["utils/*"],
       "@api/*": ["api/*"],
-      "@types/*": ["types/*"],
       "@schema/*": ["schema/*"]
     },
     "types": ["vite/client"]
