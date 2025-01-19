@@ -7,10 +7,10 @@ import { getRequest } from '@utils/httpsClient';
 import { promiseToast } from '@utils/toast';
 import { ref } from 'vue';
 
-const idNameEdit = ref(false);
+const nameEdit = ref(false);
 
 const handleNameEdit = () => {
-  idNameEdit.value = false;
+  nameEdit.value = false;
   // promiseToast({
   //   promise: new Promise<ResponseType<unknown>>(
   //     (resolve) => {
@@ -54,16 +54,13 @@ const handleImageDelete = () => {
       />
     </div>
     <div class="userInfo-edit-form">
-      <div
-        v-if="idNameEdit === false"
-        class="userInfo-info"
-      >
+      <div v-if="nameEdit === false" class="userInfo-info">
         <h3>이운학</h3>
         <p>Programmer</p>
         <span
           class="switching-text bright"
           style="align-self: flex-start"
-          @click="idNameEdit = true"
+          @click="nameEdit = true"
         >
           수정
         </span>
@@ -85,7 +82,7 @@ const handleImageDelete = () => {
 <style scoped lang="scss">
 .userInfo-container {
   display: flex;
-  width: 768px;
+  width: 100%;
   padding-top: 1.5rem;
   // background-color: red;
   .userInfo-image {
