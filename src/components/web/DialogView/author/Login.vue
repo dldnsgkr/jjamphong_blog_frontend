@@ -6,7 +6,10 @@ import LoginImage from './LoginImage.vue';
 import Github from '@components/web/common/icon/Github.vue';
 import Facebook from '@components/web/common/icon/Facebook.vue';
 import Google from '@components/web/common/icon/Google.vue';
-import { getRequest } from '@utils/httpsClient';
+import {
+  getRequest,
+  postRequest,
+} from '@utils/httpsClient';
 import { useField, useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import { LoginSchema } from '@schema/Login.schema';
@@ -29,7 +32,12 @@ const [password, passwordAttrs] = defineField('password');
 // const { value: password } = useField('password');
 
 const testApi = () => {
-  getRequest('users/12');
+  const a = getRequest('users/12');
+  // a.then((res) => console.log(res));
+  postRequest('login', {
+    id: 'a',
+    password: 'a;slkdfjal;sdf',
+  });
 };
 
 const onSubmit = handleSubmit((values) => {
@@ -52,6 +60,7 @@ const onSubmit = handleSubmit((values) => {
             input-style="login-input"
             placeholder="Login"
             v-model="loginId"
+            autocomplete="username"
           />
           <ErrorText :text="errors.loginId" />
         </div>
@@ -62,6 +71,7 @@ const onSubmit = handleSubmit((values) => {
             input-style="login-input"
             placeholder="Password"
             v-model="password"
+            autocomplete="current-password"
           />
           <ErrorText :text="errors.password" />
         </div>

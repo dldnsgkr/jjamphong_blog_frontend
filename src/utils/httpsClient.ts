@@ -17,7 +17,7 @@ type RequestBodyType = Record<string, any>;
 
 function attachCustomeHeaders(request: Request) {
   // NOTE: 추후에 token 값 추가 하는 부분이 될듯?
-  request.headers.set('X-Foo', 'foo');
+  request.headers.set('X-ACCESS-TOKEN', 'foo');
 }
 
 async function httpClientFunction<T>({
@@ -40,18 +40,31 @@ async function httpClientFunction<T>({
       hooks: {
         beforeRequest: [attachCustomeHeaders],
       },
-    }).json<ResponseType<T>>();
+    });
 
-    return response;
+    // 응답 상태 코드 확인
+    if (!response.ok) {
+      const errorResponse = await response.json();
+      throw errorResponse; // 바로 에러 응답을 던짐
+    }
+
+    // json 파싱
+    const responseBody =
+      await response.json<ResponseType<T>>();
+
+    return responseBody;
   } catch (err) {
-    // 에러를 명확히 타입으로 처리
-    const error = err as HTTPError;
-    const errorResponse =
-      (await error.response.json()) as ErrorResponse;
-
-    console.error('HTTP Error:', errorResponse);
-
-    throw errorResponse; // 필요 시 호출자가 처리할 수 있도록 던짐
+    if (err instanceof HTTPError) {
+      try {
+        const errorResponse =
+          (await err.response.json()) as ErrorResponse;
+        throw errorResponse;
+      } catch (jsonError) {
+        throw jsonError;
+      }
+    } else {
+      throw new Error('An unknown error occurred');
+    }
   }
 }
 

@@ -4,6 +4,10 @@ type InputPropsType = {
   inputStyle?: 'basic-input' | 'login-input';
   placeholder?: string;
   modelValue?: any;
+  autocomplete?:
+    | 'username'
+    | 'current-password'
+    | 'new-password';
 };
 
 const {
@@ -11,6 +15,7 @@ const {
   inputStyle = 'basic-input',
   placeholder,
   modelValue,
+  autocomplete,
 } = defineProps<InputPropsType>();
 const emit = defineEmits<{
   (event: 'update:modelValue', value: string): void;
@@ -29,6 +34,7 @@ const handleInput = (event: Event) => {
     :type="type"
     :class="inputStyle"
     :placeholder="placeholder"
+    :autocomplete="autocomplete"
   />
 </template>
 

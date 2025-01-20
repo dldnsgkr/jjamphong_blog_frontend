@@ -55,7 +55,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    z-index: 5;
+    z-index: 3;
     opacity: 0;
     cursor: pointer;
     &:hover + label:after {

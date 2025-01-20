@@ -52,7 +52,7 @@ watch(
     z-index 0s linear 0.3s;
   overflow: auto;
   &.active {
-    z-index: 1;
+    z-index: 5;
     opacity: 1;
     transition:
       opacity 0.3s ease,
