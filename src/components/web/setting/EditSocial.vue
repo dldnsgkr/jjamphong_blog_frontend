@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import ListUi from './listUi.vue';
+import ListUi from './ListUi.vue';
 import BasicInput from '../common/input/BasicInput.vue';
 import BasicButton from '../common/button/BasicButton.vue';
 

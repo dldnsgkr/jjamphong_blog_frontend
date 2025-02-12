@@ -25,10 +25,10 @@ const handleTitleEdit = () => {
         수정
       </span>
       <div v-else class="input-wrapper">
-        <BasicInput placeholder="이메일을 입력하세요." />
         <BasicInput
-          placeholder="Github 계정을 입력하세요."
+          placeholder="이메일(아이디)을 입력하세요."
         />
+        <BasicInput placeholder="패스워드를 입력하세요." />
         <div style="margin-top: 1rem; align-self: end">
           <BasicButton
             text="변경"

@@ -74,12 +74,12 @@
 .model-2 {
   .checkbox {
     label {
-      height: 30px;
-      width: 75px;
+      height: 25px;
+      width: 70px;
       &:after {
         top: 0;
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
       }
     }
     input:checked + label {

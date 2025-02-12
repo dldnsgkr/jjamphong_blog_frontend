@@ -42,6 +42,7 @@ const { text, description } =
     }
     h3 {
       width: 10rem;
+      font-weight: 500;
     }
   }
   .description {

@@ -6,7 +6,8 @@ type ButtonPropsType = {
     | 'basic'
     | 'transparent'
     | 'basicButton'
-    | 'grassButton';
+    | 'grassButton'
+    | 'redButton';
   animationtype?:
     | 'bright'
     | 'darken'
@@ -83,6 +84,12 @@ button {
     color: #ffffff;
     background-color: #12b886;
   }
+}
+
+.redButton {
+  color: #fff;
+  background-color: #ff6b6b;
+  border: none;
 }
 
 // animationtype
