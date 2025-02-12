@@ -106,10 +106,32 @@ const hover = reactive({
 
 <template>
   <main class="detail-container">
-    <FloatArea :top="'35%'" :left="'85%'"
+    <section class="detailSection-container">
+      <h1 class="title">
+        제목입니다. 제목입니다. 제목입니다. 제목입니다.
+        제목입니다.
+      </h1>
+      <div class="detailSection-subContainer">
+        <div class="writter-info-container">
+          <div class="writter-info">
+            <p class="writter">lee un hak</p>
+            ·
+            <p class="written-date">2025년 01월 04일</p>
+          </div>
+          <BasicButton
+            text="팔로우"
+            buttonStyle="grassButton"
+          />
+        </div>
+        <div class="tag-container">
+          <LinkTag text="Vue" link="/asdf" />
+        </div>
+      </div>
+    </section>
+    <FloatArea :top="'112px'" :left="'85%'"
       >asfasfsdfsdfd</FloatArea
     >
-    <FloatArea :top="'35%'" :right="'85%'"
+    <FloatArea :top="'112px'" :right="'85%'"
       ><div class="like-share-floatContainer">
         <div
           class="floatContainer-button"
@@ -135,28 +157,6 @@ const hover = reactive({
           />
         </div></div
     ></FloatArea>
-    <section class="detailSection-container">
-      <h1 class="title">
-        제목입니다. 제목입니다. 제목입니다. 제목입니다.
-        제목입니다.
-      </h1>
-      <div class="detailSection-subContainer">
-        <div class="writter-info-container">
-          <div class="writter-info">
-            <p class="writter">lee un hak</p>
-            ·
-            <p class="written-date">2025년 01월 04일</p>
-          </div>
-          <BasicButton
-            text="팔로우"
-            buttonStyle="grassButton"
-          />
-        </div>
-        <div class="tag-container">
-          <LinkTag text="Vue" link="/asdf" />
-        </div>
-      </div>
-    </section>
     <section class="advertisement-container">
       <div style="width: 60%">
         <div
@@ -373,10 +373,24 @@ section {
         align-items: center;
         gap: 1.25rem;
         .writter-image {
-          width: 108px;
-          height: 108px;
+          width: 90px;
+          height: 90px;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: solid 1px rgba(0, 0, 0, 0.2);
+          border-radius: 10rem;
+          transition: transform 0.3s ease;
+          cursor: pointer;
           &:hover {
             transform: scale(1.1);
+          }
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
           }
         }
         .writter {
