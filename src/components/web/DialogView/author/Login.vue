@@ -1,158 +1,78 @@
 <script setup lang="ts">
-import BasicButton from '@components/web/common/button/BasicButton.vue';
-import DialogContainer from '@components/web/common/container/DialogContainer.vue';
 import BasicInput from '@components/web/common/input/BasicInput.vue';
-import LoginImage from './LoginImage.vue';
-import Github from '@components/web/common/icon/Github.vue';
-import Facebook from '@components/web/common/icon/Facebook.vue';
-import Google from '@components/web/common/icon/Google.vue';
-import {
-  getRequest,
-  postRequest,
-} from '@utils/httpsClient';
-import { useField, useForm } from 'vee-validate';
-import { toTypedSchema } from '@vee-validate/zod';
-import { LoginSchema } from '@schema/Login.schema';
+import BasicButton from '@components/web/common/button/BasicButton.vue';
 import ErrorText from '@components/web/common/ErrorText.vue';
+import { useForm, useField } from 'vee-validate';
+import { toTypedSchema } from '@vee-validate/zod';
+import {
+  LoginSchema,
+  type LoginType,
+} from '@schema/Login.schema';
+import { postRequest } from '@utils/httpsClient';
+import Github from '@components/web/common/icon/Github.vue';
+import Google from '@components/web/common/icon/Google.vue';
+import Facebook from '@components/web/common/icon/Facebook.vue';
+
+const initialValues: LoginType = {
+  mode: 'login',
+  provider_id: '',
+  password: '',
+};
 
 const { values, errors, handleSubmit, defineField } =
   useForm({
     validationSchema: toTypedSchema(LoginSchema),
-    initialValues: {
-      loginId: '',
-      password: '',
-    },
+    initialValues,
   });
 
-const [loginId, loginIdAttrs] = defineField('loginId');
+const [provider_id, provider_idAttrs] =
+  defineField('provider_id');
 const [password, passwordAttrs] = defineField('password');
 
-// useField을 통해 필드 정의
-// const { value: loginId } = useField('loginId');
-// const { value: password } = useField('password');
-
-const testApi = () => {
-  const a = getRequest('users/12');
-  // a.then((res) => console.log(res));
-  postRequest('login', {
-    id: 'a',
-    password: 'a;slkdfjal;sdf',
+const onSubmit = handleSubmit(async (values) => {
+  const response = await postRequest('auth/login', {
+    provider_id: values.provider_id,
+    password: values.password,
   });
-};
-
-const onSubmit = handleSubmit((values) => {
-  alert(JSON.stringify(values, null, 2));
 });
 </script>
 
 <template>
-  <DialogContainer width="42rem" height="38rem">
-    <div class="login-container">
-      <div class="login-image-container">
-        <LoginImage />
-        <p>환영합니다!</p>
-      </div>
-      <form @submit="onSubmit" class="login-form-container">
-        <h3>로그인</h3>
-        <div class="login-form">
-          <h4>ID or Email</h4>
-          <BasicInput
-            input-style="login-input"
-            placeholder="Login"
-            v-model="loginId"
-            autocomplete="username"
-          />
-          <ErrorText :text="errors.loginId" />
-        </div>
-        <div class="login-form">
-          <h4>Password</h4>
-          <BasicInput
-            type="password"
-            input-style="login-input"
-            placeholder="Password"
-            v-model="password"
-            autocomplete="current-password"
-          />
-          <ErrorText :text="errors.password" />
-        </div>
-        <BasicButton
-          type="submit"
-          text="로그인"
-          button-style="grassButton"
-          :click-event="() => testApi()"
-        />
-        <div class="social-login-form">
-          <h4>소셜 계정으로 로그인</h4>
-          <div class="social-login-buttons">
-            <Github />
-            <Google />
-            <Facebook fill-color="rgb(59, 89, 152)" />
-          </div>
-        </div>
-      </form>
-      <p class="form-switching">
-        aldjhskfa;slfja;sldflad;sfjasdl;fjalsd;
-      </p>
+  <form @submit="onSubmit" class="login-form-container">
+    <h3>로그인</h3>
+    <div class="login-form">
+      <h4>ID</h4>
+      <BasicInput
+        input-style="login-input"
+        v-model="provider_id"
+        placeholder="Login"
+      />
+      <ErrorText :text="errors.provider_id" />
     </div>
-  </DialogContainer>
-</template>
 
-<style scoped lang="scss">
-.login-container {
-  display: flex;
-  height: 100%;
-  .login-image-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    width: 35%;
-    height: 100%;
-    background-color: #f8f9fa;
-    p {
-      font-size: xx-large;
-    }
-  }
-  .login-form-container {
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    padding: 4rem 2rem;
-    width: 65%;
-    height: 100%;
-    h3 {
-      margin-bottom: 1.5rem;
-    }
-    h4 {
-      color: #868e96;
-      font-weight: 600;
-    }
-    .login-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .social-login-form {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      margin-top: 2.5rem;
-      .social-login-buttons {
-        align-self: center;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 80%;
-      }
-    }
-  }
-  .form-switching {
-    position: absolute;
-    bottom: 2%;
-    right: 2%;
-    color: #12b886;
-  }
-}
-</style>
+    <div class="login-form">
+      <h4>Password</h4>
+      <BasicInput
+        input-style="login-input"
+        type="password"
+        v-model="password"
+        placeholder="Password"
+      />
+      <ErrorText :text="errors.password" />
+    </div>
+
+    <BasicButton
+      type="submit"
+      text="로그인"
+      button-style="grassButton"
+    />
+    <div class="social-login-form">
+      <h4>소셜 계정으로 로그인</h4>
+      <div class="social-login-buttons">
+        <Github />
+        <Google />
+        <Facebook fill-color="rgb(59, 89, 152)" />
+      </div>
+    </div>
+  </form>
+</template>

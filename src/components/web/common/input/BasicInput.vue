@@ -7,7 +7,8 @@ type InputPropsType = {
   autocomplete?:
     | 'username'
     | 'current-password'
-    | 'new-password';
+    | 'new-password'
+    | 'email';
 };
 
 const {

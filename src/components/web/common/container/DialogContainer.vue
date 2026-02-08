@@ -8,7 +8,7 @@ type DialogContainerType = {
   disCloseBtn?: boolean;
 };
 
-const { width = '60%', height = '40%' } =
+const { width = '60%' } =
   defineProps<DialogContainerType>();
 
 const { handleModalState } = useModalStore();
@@ -17,10 +17,7 @@ handleModalState;
 </script>
 
 <template>
-  <section
-    class="dialog-container"
-    :style="{ width, height }"
-  >
+  <section class="dialog-container" :style="{ width }">
     <CloseX
       class="icon-close"
       @click="handleModalState"

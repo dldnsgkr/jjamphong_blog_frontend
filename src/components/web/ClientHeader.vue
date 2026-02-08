@@ -6,7 +6,7 @@ import SearchBar from './dialogView/SearchBar.vue';
 import { useRoute, useRouter } from 'vue-router';
 import BasicButton from './common/button/BasicButton.vue';
 import { useModalStore } from '@stores/modalStore';
-import Login from './dialogView/author/Login.vue';
+import AuthDialog from './dialogView/author/AuthDialog.vue';
 
 const route = useRoute();
 
@@ -27,8 +27,8 @@ function openSearchModal() {
 /**
  * main page로 이동
  */
-function openLoginModal() {
-  openModal(Login);
+function openAuthModal() {
+  openModal(AuthDialog);
 }
 
 /**
@@ -60,7 +60,7 @@ watch(
           type="button"
           text="로그인"
           button-style="basicButton"
-          :click-event="() => openLoginModal()"
+          :click-event="() => openAuthModal()"
         />
         <!-- <BasicButton text="팔로우" /> -->
       </div>
