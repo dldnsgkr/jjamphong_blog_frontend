@@ -72,45 +72,47 @@ export const getRequest = async <T>(
   url: string,
   searchParams?: searchParamsType
 ): Promise<ResponseType<T>> => {
-  return await httpClientFunction<T>({
+  return httpClientFunction<T>({
     requestMethod: 'GET',
     url,
     searchParams,
   });
 };
 
-export const postRequest = (
+export const postRequest = <T>(
   url: string,
   body: RequestBodyType
-) =>
-  httpClientFunction({
+): Promise<ResponseType<T>> =>
+  httpClientFunction<T>({
     requestMethod: 'POST',
     url,
     body,
   });
 
-export const putRequest = (
+export const putRequest = <T>(
   url: string,
   body: RequestBodyType
-) =>
-  httpClientFunction({
+): Promise<ResponseType<T>> =>
+  httpClientFunction<T>({
     requestMethod: 'PUT',
     url,
     body,
   });
 
-export const patchRequest = (
+export const patchRequest = <T>(
   url: string,
   body: RequestBodyType
-) =>
-  httpClientFunction({
+): Promise<ResponseType<T>> =>
+  httpClientFunction<T>({
     requestMethod: 'PATCH',
     url,
     body,
   });
 
-export const deleteRequest = (url: string) =>
-  httpClientFunction({
+export const deleteRequest = <T>(
+  url: string
+): Promise<ResponseType<T>> =>
+  httpClientFunction<T>({
     requestMethod: 'DELETE',
     url,
   });

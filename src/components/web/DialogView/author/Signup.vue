@@ -5,11 +5,14 @@ import ErrorText from '@components/web/common/ErrorText.vue';
 import { useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import {
+  NicknameSchema,
   SignupSchema,
+  type NicknameType,
   type SignupType,
 } from '@schema/Login.schema';
 import { postRequest } from '@utils/httpsClient';
 import { ref } from 'vue';
+import PopupComponent from '@components/universal/PopupComponent.vue';
 
 // 로그인/회원가입 모드 상태
 const step = ref(1);
@@ -41,29 +44,66 @@ const [confirmPassword, confirmPasswordAttrs] = defineField(
   'confirmPassword'
 );
 
-const onSubmit = handleSubmit(async (values) => {
+const {
+  handleSubmit: handleNicknameSubmit,
+  defineField: defineNicknameField,
+  errors: nicknameErrors,
+} = useForm<NicknameType>({
+  validationSchema: toTypedSchema(NicknameSchema),
+  initialValues: {
+    nickname: '',
+  },
+});
+
+const [nickname, nicknameAttrs] =
+  defineNicknameField('nickname');
+
+const onSubmitSignup = handleSubmit(async (values) => {
   try {
-    const response = await postRequest('auth/signup', {
+    // 회원가입 요청
+    const response = await postRequest<{
+      temporaryNickname: string;
+    }>('auth/signup', {
       provider_id: values.provider_id,
       email: values.email,
       password: values.password,
       confirmPassword: values.confirmPassword,
     });
-    console.log(response);
 
+    // 성공시 nickname 등록 단계로 이동
     if (response.code === 201) {
       nextStep();
+      nickname.value = response.contents?.temporaryNickname;
+      document
+        .querySelector('.form-switching')
+        ?.classList.add('hidden');
     }
   } catch (error) {
     console.error('Signup failed:', error);
   }
 });
+
+const onUploadNickname = handleNicknameSubmit(
+  async (values) => {
+    try {
+      // await postRequest('auth/nickname', {
+      //   nickname: values.nickname,
+      // });
+    } catch (error) {
+      console.error('Nickname registration failed:', error);
+    }
+  }
+);
 </script>
 
 <template>
   <Transition name="form-slide" mode="out-in">
     <template v-if="step === 1">
-      <form @submit="onSubmit" class="login-form-container">
+      <form
+        key="signup"
+        @submit="onSubmitSignup"
+        class="login-form-container"
+      >
         <h3>회원가입</h3>
 
         <div class="login-form">
@@ -115,8 +155,31 @@ const onSubmit = handleSubmit(async (values) => {
         />
       </form>
     </template>
-    <template v-else>
-      <form></form>
+    <template v-else-if="step == 2">
+      <form
+        key="nickname"
+        @submit="onUploadNickname"
+        class="login-form-container"
+      >
+        <div class="login-form">
+          <h4>nickname</h4>
+          <BasicInput
+            input-style="login-input"
+            type="text"
+            v-model="nickname"
+            placeholder="nickname"
+          />
+          <ErrorText :text="nicknameErrors.nickname" />
+        </div>
+
+        <BasicButton
+          type="submit"
+          text="등록하기"
+          button-style="grassButton"
+        />
+      </form>
     </template>
   </Transition>
+
+  <!-- <PopupComponent></PopupComponent> -->
 </template>

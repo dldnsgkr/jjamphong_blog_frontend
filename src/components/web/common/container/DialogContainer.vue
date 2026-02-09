@@ -12,8 +12,6 @@ const { width = '60%' } =
   defineProps<DialogContainerType>();
 
 const { handleModalState } = useModalStore();
-
-handleModalState;
 </script>
 
 <template>
