@@ -11,7 +11,8 @@ export type ResponseType<T> = {
  * api error response
  */
 export type ErrorResponse = {
+  success: false;
   code: number;
   message: string;
-  contents: string;
+  errors?: unknown;
 };

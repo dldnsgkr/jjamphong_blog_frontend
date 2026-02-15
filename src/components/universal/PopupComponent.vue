@@ -1,31 +1,6 @@
 <script setup lang="ts">
-import type { Component } from 'vue';
-
-type PopupType =
-  | 'modal'
-  | 'alert'
-  | 'dialog'
-  | 'bottomsheet';
-
-type PopupProps = {
-  modelValue: boolean;
-  type: PopupType;
-
-  // 공통
-  title?: string;
-  message?: string;
-
-  // 버튼
-  confirmText?: string;
-  cancelText?: string;
-
-  // 동작
-  closeOnDim?: boolean;
-
-  // 커스텀 (선택)
-  contentComponent?: Component;
-  contentProps?: Record<string, any>;
-};
+import type { PopupProps } from 'types/common/popup.types';
+import { computed } from 'vue';
 
 const props = defineProps<PopupProps>();
 const emit = defineEmits([
@@ -53,46 +28,52 @@ const onDimClick = () => {
 
 <template>
   <Teleport to="body">
-    <div
-      v-if="modelValue"
-      class="popup-background"
-      :class="[`type-${type}`]"
-      @click="onDimClick"
-    >
-      <div class="popup-wrapper" @click.stop>
-        <header
-          v-if="type === 'dialog' || type === 'bottomsheet'"
-          class="popup-header"
-        >
-          <h2 class="popup-title">{{ title }}</h2>
-          <button class="close" @click="onCancel">✕</button>
-        </header>
+    <Transition name="popup">
+      <div
+        v-if="modelValue"
+        class="popup-background"
+        :class="[`type-${type}`]"
+        @click="onDimClick"
+      >
+        <div class="popup-wrapper" @click.stop>
+          <header
+            v-if="
+              type === 'dialog' || type === 'bottomsheet'
+            "
+            class="popup-header"
+          >
+            <h2 class="popup-title">{{ title }}</h2>
+            <button class="close" @click="onCancel">
+              ✕
+            </button>
+          </header>
 
-        <div class="popup-content">
-          <p v-if="!contentComponent && message">
-            {{ message }}
-          </p>
+          <div class="popup-content">
+            <p v-if="!contentComponent && message">
+              {{ message }}
+            </p>
 
-          <component
-            v-else-if="contentComponent"
-            :is="contentComponent"
-            v-bind="contentProps"
-          />
-        </div>
+            <component
+              v-else-if="contentComponent"
+              :is="contentComponent"
+              v-bind="contentProps"
+            />
+          </div>
 
-        <div
-          v-if="type !== 'bottomsheet'"
-          class="popup-actions"
-        >
-          <button v-if="cancelText" @click="onCancel">
-            {{ cancelText }}
-          </button>
-          <button @click="onConfirm">
-            {{ confirmText || '확인' }}
-          </button>
+          <div
+            v-if="type !== 'bottomsheet'"
+            class="popup-actions"
+          >
+            <button v-if="cancelText" @click="onCancel">
+              {{ cancelText }}
+            </button>
+            <button @click="onConfirm">
+              {{ confirmText || '확인' }}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </Transition>
   </Teleport>
 </template>
 
@@ -213,6 +194,31 @@ const onDimClick = () => {
       border-bottom: 1px solid #eee;
     }
   }
+}
+
+.popup-enter-from,
+.popup-leave-to {
+  opacity: 0;
+}
+
+.popup-enter-active,
+.popup-leave-active {
+  transition: opacity 0.25s ease;
+}
+
+.popup-wrapper {
+  transform: scale(0.96);
+  transition: transform 0.25s ease;
+}
+
+.popup-enter-from .popup-wrapper,
+.popup-leave-to .popup-wrapper {
+  transform: scale(0.96);
+}
+
+.popup-enter-to .popup-wrapper,
+.popup-leave-from .popup-wrapper {
+  transform: scale(1);
 }
 
 /* =========================

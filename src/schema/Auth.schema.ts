@@ -15,7 +15,7 @@ export const LoginSchema = z.object({
     .min(1, { message: '비밀번호를 입력해주세요.' }),
 });
 
-export type LoginType = z.infer<typeof LoginSchema>;
+export type LoginSchemaType = z.infer<typeof LoginSchema>;
 
 /**
  * 일반 회원가입 스키마
@@ -49,8 +49,11 @@ export const SignupSchema = z
     }
   });
 
-export type SignupType = z.infer<typeof SignupSchema>;
+export type SignupSchemaType = z.infer<typeof SignupSchema>;
 
+/**
+ * 닉네임 스키마
+ */
 export const NicknameSchema = z.object({
   nickname: z
     .string()
@@ -59,7 +62,55 @@ export const NicknameSchema = z.object({
     .regex(
       /^[a-zA-Z0-9가-힣_]+$/,
       '특수문자는 사용할 수 없습니다'
-    ),
+    )
+    .optional(),
 });
 
-export type NicknameType = z.infer<typeof NicknameSchema>;
+export type NicknameSchemaType = z.infer<
+  typeof NicknameSchema
+>;
+/**
+ * 회원 정보 수정 스키마
+ */
+export const UpdateProfileSchema = NicknameSchema.extend({
+  provider_id: z
+    .string()
+    .trim()
+    .min(1, { message: '아이디를 입력해주세요.' })
+    .optional(),
+  password: z
+    .string()
+    .trim()
+    .min(1, { message: '비밀번호를 입력해주세요.' })
+    .optional(),
+  socialInfo: z
+    .object({
+      email: z.string().email({
+        message: '유효한 이메일 주소를 입력해주세요.',
+      }),
+      github: z
+        .string()
+        .url({
+          message: '유효한 GitHub URL을 입력해주세요.',
+        })
+        .optional(),
+      twitter: z
+        .string()
+        .url({
+          message: '유효한 Twitter URL을 입력해주세요.',
+        })
+        .optional(),
+      linkedin: z
+        .string()
+        .url({
+          message: '유효한 LinkedIn URL을 입력해주세요.',
+        })
+        .optional(),
+    })
+    .optional(),
+});
+
+// DTO 타입 자동 생성
+export type UpdateProfileSchemaType = z.infer<
+  typeof UpdateProfileSchema
+>;

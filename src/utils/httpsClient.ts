@@ -1,8 +1,10 @@
 import type {
   ErrorResponse,
   ResponseType,
-} from 'types/httpsClients.type';
+} from 'types/common/httpsClients.types';
 import ky, { HTTPError } from 'ky';
+import { useAuthStore } from '@stores/authStore';
+import { errorToast } from './toast';
 
 type RequestMethodType =
   | 'GET'
@@ -16,8 +18,14 @@ type searchParamsType = Record<string, any>;
 type RequestBodyType = Record<string, any>;
 
 function attachCustomeHeaders(request: Request) {
-  // NOTE: 추후에 token 값 추가 하는 부분이 될듯?
-  request.headers.set('X-ACCESS-TOKEN', 'foo');
+  const authStore = useAuthStore();
+
+  if (authStore.accessToken) {
+    request.headers.set(
+      'Authorization',
+      `Bearer ${authStore.accessToken}`
+    );
+  }
 }
 
 async function httpClientFunction<T>({
@@ -116,3 +124,8 @@ export const deleteRequest = <T>(
     requestMethod: 'DELETE',
     url,
   });
+
+export const errorToastFunc = (error: unknown) => {
+  const err = error as ErrorResponse;
+  errorToast({ message: err.message });
+};

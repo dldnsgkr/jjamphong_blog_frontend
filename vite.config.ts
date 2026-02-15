@@ -35,6 +35,9 @@ export default defineConfig({
       '@schema': fileURLToPath(
         new URL('./src/schema', import.meta.url)
       ),
+      '@services': fileURLToPath(
+        new URL('./src/services', import.meta.url)
+      ),
     },
   },
 });

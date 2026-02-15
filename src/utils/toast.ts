@@ -1,4 +1,4 @@
-import type { ResponseType } from 'types/httpsClients.type';
+import type { ResponseType } from 'types/common/httpsClients.types';
 import { h } from 'vue';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
@@ -101,7 +101,7 @@ export const errorToast = ({
 }: {
   message: string;
 }) =>
-  toast.success(message, {
+  toast.error(message, {
     autoClose: 5000,
   });
 

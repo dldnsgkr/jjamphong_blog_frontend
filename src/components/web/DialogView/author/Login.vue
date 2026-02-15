@@ -2,22 +2,30 @@
 import BasicInput from '@components/web/common/input/BasicInput.vue';
 import BasicButton from '@components/web/common/button/BasicButton.vue';
 import ErrorText from '@components/web/common/ErrorText.vue';
-import { useForm, useField } from 'vee-validate';
+import { useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import {
   LoginSchema,
-  type LoginType,
-} from '@schema/Login.schema';
-import { postRequest } from '@utils/httpsClient';
+  type LoginSchemaType,
+} from '@schema/Auth.schema';
 import Github from '@components/web/common/icon/Github.vue';
 import Google from '@components/web/common/icon/Google.vue';
 import Facebook from '@components/web/common/icon/Facebook.vue';
+import { login } from '@services/auth.service';
+import { useAuthStore } from '@stores/authStore';
+import { successToast } from '@utils/toast';
+import { errorToastFunc } from '@utils/httpsClient';
+import { useModalStore } from '@stores/modalStore';
 
-const initialValues: LoginType = {
+const initialValues: LoginSchemaType = {
   mode: 'login',
   provider_id: '',
   password: '',
 };
+
+const authStore = useAuthStore();
+
+const modalStore = useModalStore();
 
 const { values, errors, handleSubmit, defineField } =
   useForm({
@@ -30,10 +38,28 @@ const [provider_id, provider_idAttrs] =
 const [password, passwordAttrs] = defineField('password');
 
 const onSubmit = handleSubmit(async (values) => {
-  const response = await postRequest('auth/login', {
-    provider_id: values.provider_id,
-    password: values.password,
-  });
+  try {
+    const response = await login({
+      provider_id: values.provider_id,
+      password: values.password,
+    });
+
+    // accessToken 전역 변수에 저장
+    authStore.setAccessToken(
+      response.contents?.accessToken
+    );
+
+    // user 정보저장
+    authStore.setUpUserInfo();
+
+    // 로그인, 회원가인 modal 닫기
+    modalStore.handleModalState();
+
+    // 성공 toast
+    successToast({ message: response.message });
+  } catch (error) {
+    errorToastFunc(error);
+  }
 });
 </script>
 
@@ -46,6 +72,7 @@ const onSubmit = handleSubmit(async (values) => {
         input-style="login-input"
         v-model="provider_id"
         placeholder="Login"
+        autocomplete="username"
       />
       <ErrorText :text="errors.provider_id" />
     </div>
@@ -57,6 +84,7 @@ const onSubmit = handleSubmit(async (values) => {
         type="password"
         v-model="password"
         placeholder="Password"
+        autocomplete="current-password"
       />
       <ErrorText :text="errors.password" />
     </div>

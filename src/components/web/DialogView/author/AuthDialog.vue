@@ -40,7 +40,7 @@ watch(
           :key="isLogin ? 'login' : 'register'"
         >
           <Login v-if="isLogin" />
-          <Signup v-else />
+          <Signup v-else :toggle-mode="toggleMode" />
         </div>
       </Transition>
       <Transition name="fade-slide" mode="out-in">
