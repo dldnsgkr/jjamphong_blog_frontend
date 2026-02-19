@@ -12,6 +12,7 @@ export const useAuthStore = defineStore('auth', () => {
   const user = ref<MyInfoResType>({
     email: '',
     blog_title: '',
+    user_explain: '',
     nickname: '',
     provider: '',
     provider_id: '',
@@ -32,6 +33,7 @@ export const useAuthStore = defineStore('auth', () => {
     user.value = {
       email: '',
       blog_title: '',
+      user_explain: '',
       nickname: '',
       profile_image_url: '',
       provider: '',

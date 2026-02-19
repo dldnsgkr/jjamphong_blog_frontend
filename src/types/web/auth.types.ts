@@ -31,6 +31,8 @@ export type MyInfoResType = {
   email: string;
   /** 회원 블로그 제목 tag */
   blog_title: string;
+  /** 회원 블로그 설명 */
+  user_explain: string;
   /** 닉네임 */
   nickname: string;
   /** 로그인 방식 type */

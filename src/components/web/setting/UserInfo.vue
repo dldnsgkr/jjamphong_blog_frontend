@@ -3,13 +3,34 @@ import BasicButton from '@components/web/common/button/BasicButton.vue';
 import BasicInput from '@components/web/common/input/BasicInput.vue';
 import FileInput from '@components/web/common/input/FileInput.vue';
 import WritterImage from '@components/web/common/ui/WritterImage.vue';
+import { useAuthStore } from '@stores/authStore';
 import { getRequest } from '@utils/httpsClient';
 import { promiseToast } from '@utils/toast';
+import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 
+//
+const authStore = useAuthStore();
+const { user } = storeToRefs(authStore);
+
+// 수정 활성화 여부
 const nameEdit = ref(false);
 
+const editNickname = ref(user.value.nickname);
+const editExplain = ref(user.value.user_explain);
+
+console.log(editNickname);
+
+const startEdit = () => {
+  editNickname.value = user.value.nickname;
+  editExplain.value = user.value.user_explain ?? '';
+  nameEdit.value = true;
+};
+
 const handleNameEdit = () => {
+  user.value.nickname = editNickname.value;
+  user.value.user_explain = editExplain.value;
+
   nameEdit.value = false;
   // promiseToast({
   //   promise: new Promise<ResponseType<unknown>>(
@@ -55,8 +76,8 @@ const handleImageDelete = () => {
     </div>
     <div class="userInfo-edit-form">
       <div v-if="nameEdit === false" class="userInfo-info">
-        <h3>이운학</h3>
-        <p>Programmer</p>
+        <h3>{{ user.nickname }}</h3>
+        <p>{{ user.user_explain }}</p>
         <span
           class="switching-text bright"
           style="align-self: flex-start"
@@ -66,8 +87,14 @@ const handleImageDelete = () => {
         </span>
       </div>
       <div v-else class="userInfo-edit">
-        <BasicInput />
-        <BasicInput />
+        <BasicInput
+          v-model="editNickname"
+          placeholder="닉네임을 입력해주세요."
+        />
+        <BasicInput
+          v-model="editExplain"
+          placeholder="자기를 소개하는 글을 작성을 작성해주세요.(100자 이내)"
+        />
         <BasicButton
           width="5rem"
           button-round="round-sm"
