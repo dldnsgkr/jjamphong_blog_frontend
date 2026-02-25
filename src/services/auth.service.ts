@@ -7,10 +7,21 @@ import type {
   LoginReqType,
   LoginResType,
   MyInfoResType,
+  RefreshReqType,
+  RefreshResType,
   SignupReqType,
   SignupResType,
   UpdateProfileReqType,
 } from 'types/web/auth.types';
+
+/**
+ * refreshToken을 이용한 재발급 API
+ * @param object
+ * @returns
+ */
+const refreshToken = async () => {
+  return await postRequest<RefreshResType>('auth/refresh');
+};
 
 /**
  * 회원가입 API
@@ -37,6 +48,14 @@ const login = async (object: LoginReqType) => {
 };
 
 /**
+ * 로그아웃 API
+ * @returns
+ */
+const logout = async () => {
+  return await postRequest<LoginResType>('auth/logout');
+};
+
+/**
  * 회원 정보 수정 API
  * @param object
  * @returns
@@ -54,4 +73,11 @@ const myInfo = async () => {
   return await getRequest<MyInfoResType>('auth/me');
 };
 
-export { signup, login, updateUser, myInfo };
+export {
+  refreshToken,
+  signup,
+  login,
+  logout,
+  updateUser,
+  myInfo,
+};

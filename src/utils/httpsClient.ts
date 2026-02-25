@@ -45,6 +45,7 @@ async function httpClientFunction<T>({
       json: body,
       prefixUrl: import.meta.env.VITE_API_URL,
       searchParams: searchParams,
+      credentials: 'include',
       hooks: {
         beforeRequest: [attachCustomeHeaders],
       },
@@ -89,7 +90,7 @@ export const getRequest = async <T>(
 
 export const postRequest = <T>(
   url: string,
-  body: RequestBodyType
+  body?: RequestBodyType
 ): Promise<ResponseType<T>> =>
   httpClientFunction<T>({
     requestMethod: 'POST',

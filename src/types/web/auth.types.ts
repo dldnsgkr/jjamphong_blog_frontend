@@ -4,6 +4,12 @@ import type {
   UpdateProfileSchemaType,
 } from '@schema/Auth.schema';
 
+/** refreshToken을 이용한 재발급 API request type */
+export type RefreshReqType = { refreshToken: string };
+
+/** refreshToken을 이용한 재발급 API response type */
+export type RefreshResType = { accessToken: string };
+
 /** 로그인 API request type */
 export type LoginReqType = Omit<LoginSchemaType, 'mode'>;
 

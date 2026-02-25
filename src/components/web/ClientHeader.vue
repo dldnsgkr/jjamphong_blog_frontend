@@ -14,6 +14,7 @@ import { useModalStore } from '@stores/modalStore';
 import AuthDialog from './dialogView/author/AuthDialog.vue';
 import { useAuthStore } from '@stores/authStore';
 import { storeToRefs } from 'pinia';
+import { logout } from '@services/auth.service';
 
 // vue router 조정 hook
 const route = useRoute();
@@ -38,6 +39,14 @@ const handleMenuClick = (callback?: () => void) => {
 
   if (callback) {
     callback();
+  }
+};
+
+const handleLogout = async () => {
+  try {
+    await logout();
+  } finally {
+    window.location.href = '/';
   }
 };
 
@@ -149,7 +158,9 @@ onBeforeUnmount(() => {
               >
                 설정
               </li>
-              <li>로그아웃</li>
+              <li @click="handleMenuClick(handleLogout)">
+                로그아웃
+              </li>
             </ul>
           </div>
         </div>
