@@ -16,6 +16,7 @@ import { useAuthStore } from '@stores/authStore';
 import { successToast } from '@utils/toast';
 import { errorToastFunc } from '@utils/httpsClient';
 import { useModalStore } from '@stores/modalStore';
+import { watch } from 'vue';
 
 const initialValues: LoginSchemaType = {
   mode: 'login',
@@ -27,11 +28,16 @@ const authStore = useAuthStore();
 
 const modalStore = useModalStore();
 
-const { values, errors, handleSubmit, defineField } =
-  useForm({
-    validationSchema: toTypedSchema(LoginSchema),
-    initialValues,
-  });
+const {
+  values,
+  errors,
+  handleSubmit,
+  defineField,
+  resetForm,
+} = useForm({
+  validationSchema: toTypedSchema(LoginSchema),
+  initialValues,
+});
 
 const [provider_id, provider_idAttrs] =
   defineField('provider_id');
@@ -61,6 +67,18 @@ const onSubmit = handleSubmit(async (values) => {
     errorToastFunc(error);
   }
 });
+
+// form이 닫혔을 때 값 schema error 초기화
+watch(
+  () => modalStore.modalState,
+  (newState, oldState) => {
+    if (newState === false) {
+      resetForm({
+        values: values, // 값 유지
+      });
+    }
+  }
+);
 </script>
 
 <template>
@@ -69,10 +87,11 @@ const onSubmit = handleSubmit(async (values) => {
     <div class="login-form">
       <h4>ID</h4>
       <BasicInput
+        type="text"
         input-style="login-input"
         v-model="provider_id"
         placeholder="Login"
-        autocomplete="username"
+        autocomplete="off"
       />
       <ErrorText :text="errors.provider_id" />
     </div>

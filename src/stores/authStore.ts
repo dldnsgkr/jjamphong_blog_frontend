@@ -44,6 +44,7 @@ export const useAuthStore = defineStore('auth', () => {
   async function setUpUserInfo() {
     const response = await myInfo();
     user.value = response.contents;
+    console.log(user.value);
   }
 
   return {

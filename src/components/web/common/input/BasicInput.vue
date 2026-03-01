@@ -5,6 +5,7 @@ type InputPropsType = {
   placeholder?: string;
   modelValue?: any;
   autocomplete?:
+    | 'off'
     | 'username'
     | 'current-password'
     | 'new-password'

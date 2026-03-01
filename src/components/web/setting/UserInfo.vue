@@ -3,11 +3,12 @@ import BasicButton from '@components/web/common/button/BasicButton.vue';
 import BasicInput from '@components/web/common/input/BasicInput.vue';
 import FileInput from '@components/web/common/input/FileInput.vue';
 import WritterImage from '@components/web/common/ui/WritterImage.vue';
+import { updateUser } from '@services/auth.service';
 import { useAuthStore } from '@stores/authStore';
 import { getRequest } from '@utils/httpsClient';
 import { promiseToast } from '@utils/toast';
 import { storeToRefs } from 'pinia';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 
 //
 const authStore = useAuthStore();
@@ -16,10 +17,19 @@ const { user } = storeToRefs(authStore);
 // 수정 활성화 여부
 const nameEdit = ref(false);
 
-const editNickname = ref(user.value.nickname);
-const editExplain = ref(user.value.user_explain);
+const editNickname = ref('');
+const editExplain = ref('');
 
-console.log(editNickname);
+watch(
+  user,
+  (newUser) => {
+    if (newUser) {
+      editNickname.value = newUser.nickname;
+      editExplain.value = newUser.user_explain;
+    }
+  },
+  { immediate: true }
+);
 
 const startEdit = () => {
   editNickname.value = user.value.nickname;
@@ -32,6 +42,10 @@ const handleNameEdit = () => {
   user.value.user_explain = editExplain.value;
 
   nameEdit.value = false;
+  updateUser({
+    nickname: editNickname.value,
+    userExplain: editExplain.value,
+  });
   // promiseToast({
   //   promise: new Promise<ResponseType<unknown>>(
   //     (resolve) => {
@@ -43,7 +57,7 @@ const handleNameEdit = () => {
   //     }
   //   ),
   // });
-  promiseToast({ promise: getRequest('users/12') });
+  // promiseToast({ promise: getRequest('users/12') });
 };
 
 const handleImageUpload = (event: Event) => {
@@ -128,6 +142,9 @@ const handleImageDelete = () => {
       gap: 0.75rem;
       h3 {
         font-size: 2.5rem;
+      }
+      p {
+        color: #868e96;
       }
     }
     .userInfo-edit {

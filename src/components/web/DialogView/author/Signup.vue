@@ -16,7 +16,7 @@ import type {
   PopupFunc,
   PopupProps,
 } from 'types/common/popup.types';
-import { signup, updateUser } from '@services/auth.service';
+import { signup } from '@services/auth.service';
 import { successToast } from '@utils/toast';
 
 const props = defineProps<{

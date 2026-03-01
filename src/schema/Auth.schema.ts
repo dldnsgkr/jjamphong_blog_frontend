@@ -108,6 +108,7 @@ export const UpdateProfileSchema = NicknameSchema.extend({
         .optional(),
     })
     .optional(),
+  userExplain: z.string().optional(),
 });
 
 // DTO 타입 자동 생성
