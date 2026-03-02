@@ -6,6 +6,7 @@ import BasicButton from '../common/button/BasicButton.vue';
 import { useAuthStore } from '@stores/authStore';
 import { storeToRefs } from 'pinia';
 import { updateUser } from '@services/auth.service';
+import { errorToast } from '@utils/toast';
 
 const authStore = useAuthStore();
 const { user } = storeToRefs(authStore);
@@ -15,6 +16,12 @@ const titleEdit = ref(false);
 const editTitle = ref('');
 
 const handleTitleEdit = () => {
+  if (!editTitle.value) {
+    return errorToast({
+      message: '벨로그 제목을 입력해주세요.',
+    });
+  }
+
   titleEdit.value = false;
 
   updateUser({
