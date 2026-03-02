@@ -23,6 +23,7 @@ export const useAuthStore = defineStore('auth', () => {
     provider: '',
     provider_id: '',
     profile_image_url: '',
+    theme: '',
   });
 
   /** 로그인 여부 */
@@ -50,13 +51,13 @@ export const useAuthStore = defineStore('auth', () => {
       profile_image_url: '',
       provider: '',
       provider_id: '',
+      theme: 'light',
     };
   }
 
   async function setUpUserInfo() {
     const response = await myInfo();
     user.value = response.contents;
-    console.log(user.value);
   }
 
   return {

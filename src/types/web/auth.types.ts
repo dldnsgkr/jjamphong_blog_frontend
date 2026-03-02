@@ -53,4 +53,6 @@ export type MyInfoResType = {
   provider_id: string;
   /** 회원의 프로필 이미지 url */
   profile_image_url: string;
+  /** 사용자 theme 정의 */
+  theme: 'light' | 'dark' | 'system' | '';
 };
