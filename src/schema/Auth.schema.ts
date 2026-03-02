@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { optional, z } from 'zod';
 
 /**
  * 일반 로그인 스키마
@@ -69,6 +69,7 @@ export const NicknameSchema = z.object({
 export type NicknameSchemaType = z.infer<
   typeof NicknameSchema
 >;
+
 /**
  * 회원 정보 수정 스키마
  */
@@ -98,3 +99,32 @@ export const UpdateProfileSchema = NicknameSchema.extend({
 export type UpdateProfileSchemaType = z.infer<
   typeof UpdateProfileSchema
 >;
+
+/**
+ * 설정 - 로그인 정보 수정 스키마
+ */
+export const UpdateLoginInfoSchema = z
+  .object({
+    provider_id: z
+      .string()
+      .min(4, '아이디는 최소 4자 이상입니다.')
+      .max(20),
+    password: z.string().optional(),
+    passwordChk: z.string().optional(),
+  })
+  .refine(
+    (data) => {
+      // 둘 다 비어있으면 OK (비번 변경 안 하는 경우)
+      if (!data.password && !data.passwordChk) return true;
+
+      // 하나만 입력되면 실패
+      if (!data.password || !data.passwordChk) return false;
+
+      // 둘 다 입력되었으면 일치 검사
+      return data.password === data.passwordChk;
+    },
+    {
+      message: '비밀번호가 일치하지 않습니다.',
+      path: ['passwordChk'],
+    }
+  );
