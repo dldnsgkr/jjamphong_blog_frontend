@@ -10,6 +10,12 @@ export const useAuthStore = defineStore('auth', () => {
 
   /** user 정보 */
   const user = ref<MyInfoResType>({
+    social_instagram: '',
+    social_slack: '',
+    social_discord: '',
+    social_github: '',
+    social_phone: '',
+    social_facebook: '',
     email: '',
     blog_title: '',
     user_explain: '',
@@ -31,6 +37,12 @@ export const useAuthStore = defineStore('auth', () => {
   function clearAuth() {
     accessToken.value = null;
     user.value = {
+      social_instagram: '',
+      social_slack: '',
+      social_discord: '',
+      social_github: '',
+      social_phone: '',
+      social_facebook: '',
       email: '',
       blog_title: '',
       user_explain: '',

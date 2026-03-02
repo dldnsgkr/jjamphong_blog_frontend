@@ -33,6 +33,12 @@ export type UpdateProfileReqType = UpdateProfileSchemaType;
 
 /** 회원 정보 API response type */
 export type MyInfoResType = {
+  social_instagram: string;
+  social_slack: string;
+  social_discord: string;
+  social_github: string;
+  social_phone: string;
+  social_facebook: string;
   /** 인증 이메일 */
   email: string;
   /** 회원 블로그 제목 tag */
