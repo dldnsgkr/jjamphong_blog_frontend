@@ -25,19 +25,25 @@ const handleSocialEdit = () => {
         정보 추가
       </span>
       <div v-else class="input-wrapper">
-        <BasicInput placeholder="이메일을 입력하세요." />
         <BasicInput
-          placeholder="Github 계정을 입력하세요."
+          placeholder="instagram 계정을 입력하세요."
+        />
+        <BasicInput placeholder="슬랙 email을 입력하세요" />
+        <BasicInput
+          placeholder="Discord 계정 email을 입력하세요."
+          autocomplete="email"
         />
         <BasicInput
-          placeholder="Twitter 계정을 입력하세요."
+          placeholder="Github 계정을 입력하세요."
+          autocomplete="email"
+        />
+        <BasicInput
+          placeholder="개인 휴대전화번호를 입력하세요."
         />
         <BasicInput
           placeholder="https://www.facebook.com/"
         />
-        <BasicInput
-          placeholder="홈페이지 주소를 입력하세요."
-        />
+        <BasicInput placeholder="이메일을 입력하세요." />
         <div style="margin-top: 1rem; align-self: end">
           <BasicButton
             text="저장"

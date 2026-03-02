@@ -1,13 +1,36 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import ListUi from './ListUi.vue';
 import BasicInput from '../common/input/BasicInput.vue';
 import BasicButton from '../common/button/BasicButton.vue';
+import { useAuthStore } from '@stores/authStore';
+import { storeToRefs } from 'pinia';
+import { updateUser } from '@services/auth.service';
+
+const authStore = useAuthStore();
+const { user } = storeToRefs(authStore);
 
 const titleEdit = ref(false);
+
+const editTitle = ref('');
+
 const handleTitleEdit = () => {
   titleEdit.value = false;
+
+  updateUser({
+    blog_title: editTitle.value,
+  });
 };
+
+watch(
+  user,
+  (newUser) => {
+    if (newUser) {
+      editTitle.value = newUser.blog_title;
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
@@ -17,8 +40,10 @@ const handleTitleEdit = () => {
           제목입니다."
   >
     <template #element1>
-      <p v-if="titleEdit === false">jacelee.log</p>
-      <BasicInput v-else />
+      <p v-if="titleEdit === false">
+        {{ user.blog_title }}
+      </p>
+      <BasicInput v-model="editTitle" v-else />
     </template>
     <template #element2>
       <span

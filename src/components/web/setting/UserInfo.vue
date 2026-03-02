@@ -20,17 +20,6 @@ const nameEdit = ref(false);
 const editNickname = ref('');
 const editExplain = ref('');
 
-watch(
-  user,
-  (newUser) => {
-    if (newUser) {
-      editNickname.value = newUser.nickname;
-      editExplain.value = newUser.user_explain;
-    }
-  },
-  { immediate: true }
-);
-
 const startEdit = () => {
   editNickname.value = user.value.nickname;
   editExplain.value = user.value.user_explain ?? '';
@@ -73,6 +62,17 @@ const handleImageUpload = (event: Event) => {
 const handleImageDelete = () => {
   promiseToast({ promise: getRequest('users/12') });
 };
+
+watch(
+  user,
+  (newUser) => {
+    if (newUser) {
+      editNickname.value = newUser.nickname;
+      editExplain.value = newUser.user_explain;
+    }
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
