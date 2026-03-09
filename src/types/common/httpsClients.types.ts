@@ -12,7 +12,7 @@ export type ResponseType<T> = {
  */
 export type ErrorResponse = {
   success: false;
-  code: number;
+  code: string;
   message: string;
   errors?: unknown;
 };

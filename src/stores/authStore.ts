@@ -30,7 +30,7 @@ export const useAuthStore = defineStore('auth', () => {
   const isLoggedIn = computed(() => !!accessToken.value);
 
   /** accessToken 설정 함수 */
-  function setAccessToken(token: string) {
+  function setAccessToken(token: string | null) {
     accessToken.value = token;
   }
 

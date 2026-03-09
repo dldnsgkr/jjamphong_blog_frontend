@@ -65,8 +65,20 @@ async function httpClientFunction<T>({
   } catch (err) {
     if (err instanceof HTTPError) {
       try {
+        const status = err.response.status;
+
         const errorResponse =
           (await err.response.json()) as ErrorResponse;
+
+        // response code가 token 관련 및 권한 관련 오류를 뱉어낼 경우 accessToken을 아예 비워버린다.
+        if (
+          ['TOKEN_EXPIRED', 'AUTH_REQUIRED'].includes(
+            errorResponse.code
+          )
+        ) {
+          const authStore = useAuthStore();
+          authStore.setAccessToken(null);
+        }
         throw errorResponse;
       } catch (jsonError) {
         throw jsonError;
